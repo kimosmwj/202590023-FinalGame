@@ -1,0 +1,6 @@
+{
+  "name": "便利店经营游戏",
+  "description": "一款基于AI驱动顾客对话性格与购买需求的横屏便利店卡通模拟经营游戏。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
