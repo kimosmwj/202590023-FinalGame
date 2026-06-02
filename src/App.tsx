@@ -20,7 +20,8 @@ import {
   Info,
   Volume2,
   VolumeX,
-  Languages
+  Languages,
+  Home
 } from 'lucide-react';
 import { 
   type LanguageType, 
@@ -105,6 +106,10 @@ export default function App() {
   const [particles, setParticles] = useState<{ id: number; left: number; delay: number; scale: number; duration: number }[]>([]);
   const [particlesType, setParticlesType] = useState<'stars' | 'warnings' | 'none'>('none');
   const [hasAlertedUnder30, setHasAlertedUnder30] = useState<boolean>(false);
+
+  // Start Screen and Gameplay Tutorial/Introduction States
+  const [gameStarted, setGameStarted] = useState<boolean>(false);
+  const [showTutorial, setShowTutorial] = useState<boolean>(false);
 
   const [bgmAudio] = useState(() => {
     const audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3");
@@ -336,7 +341,7 @@ export default function App() {
       console.log("Loaded game config:", data);
       setGameConfig(data);
       
-      const initialScore = data.initial?.value ?? 50;
+      const initialScore = 50; // Set to exactly 50% baseline as explicitly requested
       if (shouldResetScore) {
         setSatisfaction(initialScore);
       }
@@ -346,6 +351,32 @@ export default function App() {
       showToast(t.toastSyncFail, "error");
     } finally {
       setLoadingConfig(false);
+    }
+  };
+
+  const resetGame = async () => {
+    // 1. Instantly reset all UI state so there is zero perceived delay, returning to 50% satisfaction
+    setSatisfaction(50);
+    setDialogRoundCount(0);
+    setHasAlertedUnder30(false);
+    setSelectedItems([]);
+    setResponseText("");
+    setParticles([]);
+    setParticlesType('none');
+    setTransitioningNext(false);
+    setChatHistory([]);
+    setCustomerCount(0);
+    setCustomerFeeling(lang === "en" ? "👋 Normal" : lang === "ko" ? "👋 정상" : "👋 正常");
+
+    showToast(lang === "en" ? "Game Resetting... 🏪" : lang === "ko" ? "게임 리셋 중... 🏪" : "正在重新开始游戏... 🏪", "info");
+
+    try {
+      // 2. Directly load the new customer (skipping the slow spreadsheet config call)
+      await loadNewCustomer(undefined, undefined, true);
+    } catch (e) {
+      console.error("Error resetting game guest:", e);
+      // Even if loadNewCustomer fails, we don't get stuck! We force local state safety
+      setSatisfaction(50);
     }
   };
 
@@ -719,7 +750,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen lg:h-screen w-full bg-[#FFEECC] text-[#442211] font-sans p-2 lg:p-4 select-none flex flex-col items-center justify-start lg:justify-center overflow-x-hidden">
-      <div className="flex flex-col w-full max-w-6xl justify-between gap-3 lg:gap-4 lg:h-[calc(100vh-2.5rem)] lg:max-h-[960px] lg:min-h-[700px] overflow-hidden">
+      <div className="flex flex-col w-full max-w-6xl justify-between gap-3 lg:gap-4 lg:h-[calc(100vh-2.5rem)] lg:max-h-[960px] lg:min-h-[700px] overflow-hidden relative">
         
         {/* Dynamic Toast Alerts */}
         <AnimatePresence>
@@ -746,6 +777,164 @@ export default function App() {
                 <Info className="w-4 h-4 sm:w-5 sm:h-5 text-[#7A5C00] shrink-0" />
               )}
               <span className="flex-grow">{toastMessage}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Start Game & Tutorial Interface Overlay */}
+        <AnimatePresence>
+          {!gameStarted && (
+            <motion.div
+              key="start-screen-overlay"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="absolute inset-0 z-50 bg-cover bg-center rounded-[32px] border-8 border-[#664422] shadow-[12px_12px_0px_0px_rgba(102,68,34,1)] overflow-hidden flex flex-col items-center justify-between p-4 sm:p-8 select-none"
+              style={{ backgroundImage: `url(${getDriveImageUrl("https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing")})` }}
+            >
+              {/* Soft dark tinted drop shade */}
+              <div className="absolute inset-0 bg-slate-950/45 backdrop-blur-[2.5px] z-0" />
+
+              {/* Language Switcher bar */}
+              <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 sm:gap-2">
+                <div className="bg-[#FFD54F] border-4 border-[#664422] shadow-[3px_3px_0px_0px_rgba(102,68,34,1)] rounded-xl py-1 px-2.5 sm:px-3 text-[10px] sm:text-xs font-black flex items-center gap-1.5 text-[#442211]">
+                  <Languages className="w-3.5 h-3.5" />
+                  <button 
+                    onClick={() => changeLanguage('zh')} 
+                    className={`hover:text-[#FF7043] transition ${lang === 'zh' ? 'text-[#FF7043] underline decoration-2 underline-offset-2' : 'opacity-85'}`}
+                  >
+                    中文
+                  </button>
+                  <span className="text-[#664422]/50 font-bold">|</span>
+                  <button 
+                    onClick={() => changeLanguage('en')} 
+                    className={`hover:text-[#FF7043] transition ${lang === 'en' ? 'text-[#FF7043] underline decoration-2 underline-offset-2' : 'opacity-85'}`}
+                  >
+                    EN
+                  </button>
+                  <span className="text-[#664422]/50 font-bold">|</span>
+                  <button 
+                    onClick={() => changeLanguage('ko')} 
+                    className={`hover:text-[#FF7043] transition ${lang === 'ko' ? 'text-[#FF7043] underline decoration-2 underline-offset-2' : 'opacity-85'}`}
+                  >
+                    한글
+                  </button>
+                </div>
+              </div>
+
+              {/* Centered Content Card */}
+              <div className="w-full max-w-[440px] xs:max-w-md sm:max-w-lg z-10 my-auto flex flex-col items-center justify-center text-center gap-5 sm:gap-6">
+                <AnimatePresence mode="wait">
+                  {!showTutorial ? (
+                    /* --- VIEW A: START GAME COVER --- */
+                    <motion.div
+                      key="start-screen-face animate"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.25 }}
+                      className="flex flex-col items-center gap-6 w-full"
+                    >
+                      {/* Brand Logo Banner Card */}
+                      <div className="bg-[#FFD54F] border-8 border-[#664422] rounded-[32px] p-5 sm:p-8 shadow-[8px_8px_0px_0px_rgba(102,68,34,1)] text-[#442211] w-full flex flex-col items-center select-none relative">
+                        <div className="bg-[#FF8A65] p-3 rounded-2xl border-4 border-[#664422] shadow-[2.5px_2.5px_0px_0px_rgba(102,68,34,1)] mb-4 animate-bounce shrink-0">
+                          <Store className="w-8 h-8 text-white" />
+                        </div>
+                        
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#5C3F21] tracking-tighter drop-shadow-sm leading-none text-center">
+                          {t.gameName}
+                        </h1>
+                        
+                        <div className="h-1 w-2/3 bg-[#664422] my-4 rounded-full opacity-35" />
+                        
+                        <p className="text-xs sm:text-sm text-[#442211] font-extrabold tracking-tight px-1 leading-relaxed">
+                          {t.gameSubtitle}
+                        </p>
+
+                        <span className="mt-4 text-[9px] font-mono font-black bg-[#664422] text-white border-2 border-[#664422] rounded-lg px-2.5 py-0.5">
+                          Google Sheets Database Driver Active
+                        </span>
+                      </div>
+
+                      {/* Launch Action Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setShowTutorial(true)}
+                        className="cursor-pointer group relative bg-amber-400 hover:bg-amber-300 active:bg-amber-500 font-extrabold text-[#442211] text-sm sm:text-base md:text-lg py-3.5 px-8 sm:px-10 rounded-[22px] border-4 border-[#664422] shadow-[5px_5px_0px_0px_rgba(102,68,34,1)] hover:shadow-[2px_2px_0px_0px_rgba(102,68,34,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 flex items-center justify-center gap-2.5 z-20 animate-pulse"
+                      >
+                        <Sparkles className="w-4 h-4 fill-[#664422] text-[#664422] group-hover:rotate-12 transition-transform" />
+                        <span>{t.startGameBtn}</span>
+                      </motion.button>
+                    </motion.div>
+                  ) : (
+                    /* --- VIEW B: TUTORIAL GUIDE BOOK --- */
+                    <motion.div
+                      key="tutorial-screen-face animate"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.25 }}
+                      className="flex flex-col items-center gap-5 w-full"
+                    >
+                      {/* Decorative Rule Parchment Card */}
+                      <div className="bg-[#FFF8E1] border-8 border-[#664422] rounded-[32px] p-5 sm:p-7 shadow-[8px_8px_0px_0px_rgba(102,68,34,1)] text-[#442211] w-full text-left overflow-y-auto max-h-[340px] xs:max-h-[380px] sm:max-h-[420px] custom-scrollbar">
+                        
+                        <h2 className="text-lg sm:text-xl md:text-2xl font-black text-center text-[#442211] border-b-4 border-[#664422]/20 pb-3 mb-3.5">
+                          {t.howToPlayTitle}
+                        </h2>
+                        
+                        <p className="text-xs sm:text-sm font-black leading-relaxed mb-4 text-[#664422]">
+                          {t.howToPlayIntro}
+                        </p>
+
+                        <div className="flex flex-col gap-3">
+                          <div className="bg-[#F4ECE1] border-2 border-[#664422]/30 rounded-xl p-3 shadow-inner">
+                            <div className="text-[11px] sm:text-xs font-black text-[#5C3F21] leading-relaxed">
+                              {t.howToPlayRule1}
+                            </div>
+                          </div>
+
+                          <div className="bg-[#F4ECE1] border-2 border-[#664422]/30 rounded-xl p-3 shadow-inner">
+                            <div className="text-[11px] sm:text-xs font-black text-[#6B3A0E] leading-relaxed">
+                              {t.howToPlayRule2}
+                            </div>
+                          </div>
+
+                          <div className="bg-[#F4ECE1] border-2 border-[#664422]/30 rounded-xl p-3 shadow-inner">
+                            <div className="text-[11px] sm:text-xs font-black text-[#C62828] leading-relaxed">
+                              {t.howToPlayRule3}
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* Confirm/Continue Action Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                          setGameStarted(true);
+                          setShowTutorial(false);
+                          // Activate BGM on first legitimate interactive layout enter to comply with Autoplay rules
+                          bgmAudio.play().then(() => {
+                            setBgmPlaying(true);
+                          }).catch(e => console.log("BGM user interaction activated:", e));
+                        }}
+                        className="cursor-pointer bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 font-extrabold text-white text-sm sm:text-base py-3 px-8 rounded-2xl border-4 border-[#664422] shadow-[5px_5px_0px_0px_rgba(102,68,34,1)] hover:shadow-[2px_2px_0px_0px_rgba(102,68,34,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 flex items-center justify-center gap-2"
+                      >
+                        <span>{t.continueBtn}</span>
+                      </motion.button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Bottom attribution inside bounds */}
+              <div className="z-10 text-[9px] font-mono font-bold text-[#FFD54F]/75 text-center select-none pointer-events-none mb-1">
+                © 2026 AI Moe Convenience Store | Powered by Google Gemini & Sheets
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -877,15 +1066,22 @@ export default function App() {
               <span>{t.syncItems}</span>
             </button>
 
-            {/* Reset All score trigger */}
+            {/* Return to Start Screen (Home) */}
             <button 
               onClick={() => {
-                if (window.confirm(t.resetConfirm)) {
-                  fetchConfigAndInit(true);
-                  loadNewCustomer(undefined, undefined, true);
-                }
+                setGameStarted(false);
+                setShowTutorial(false);
               }}
-              className="p-2 border-4 border-[#664422] bg-[#FFF8E1] hover:bg-[#FFE0B2] text-[#664422] rounded-2xl transition shadow-[4px_4px_0px_0px_rgba(102,68,34,1)] active:translate-x-0.5 active:translate-y-0.5 cursor-pointer"
+              className="p-2 border-4 border-[#664422] bg-[#A1D6E2] hover:bg-[#80C2D6] text-[#442211] rounded-2xl transition shadow-[4px_4px_0px_0px_rgba(102,68,34,1)] active:translate-x-0.5 active:translate-y-0.5 cursor-pointer flex items-center justify-center"
+              title={lang === "en" ? "Return to Start Screen" : lang === "ko" ? "시작 화면으로 이동" : "返回开始界面"}
+            >
+              <Home className="w-4 h-4 font-black" />
+            </button>
+
+            {/* Reset All score trigger */}
+            <button 
+              onClick={resetGame}
+              className="p-2 border-4 border-[#664422] bg-[#FFF8E1] hover:bg-[#FFE0B2] text-[#664422] rounded-2xl transition shadow-[4px_4px_0px_0px_rgba(102,68,34,1)] active:translate-x-0.5 active:translate-y-0.5 cursor-pointer flex items-center justify-center"
               title={t.resetStore}
             >
               <RotateCcw className="w-4 h-4 font-black" />
@@ -1236,8 +1432,7 @@ export default function App() {
                     <div className="flex gap-4 mt-1 shrink-0">
                       <button 
                         onClick={() => {
-                          fetchConfigAndInit(true);
-                          loadNewCustomer(undefined, undefined, true);
+                          resetGame();
                         }}
                         className="flex-grow bg-[#4CAF50] hover:bg-[#388E3C] text-white font-black text-[10.5px] sm:text-xs md:text-sm py-2 sm:py-3.5 px-4 sm:px-6 rounded-xl sm:rounded-2xl transition duration-150 border-2 sm:border-4 border-[#664422] shadow-[3px_3px_0px_0px_rgba(102,68,34,1)] cursor-pointer active:translate-y-0.5"
                       >
@@ -1283,8 +1478,7 @@ export default function App() {
                     <div className="flex gap-4 mt-1 shrink-0">
                       <button 
                         onClick={() => {
-                          fetchConfigAndInit(true);
-                          loadNewCustomer(undefined, undefined, true);
+                          resetGame();
                         }}
                         className="flex-grow bg-[#FF7043] hover:bg-[#D84315] text-white font-black text-[10.5px] sm:text-xs md:text-sm py-2 sm:py-3.5 px-4 sm:px-6 rounded-xl sm:rounded-2xl transition duration-150 border-2 sm:border-4 border-[#664422] shadow-[3px_3px_0px_0px_rgba(102,68,34,1)] cursor-pointer active:translate-y-0.5"
                       >

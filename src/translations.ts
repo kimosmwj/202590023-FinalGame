@@ -64,6 +64,13 @@ export interface TranslationSet {
   bgmBypassHint: string;
   statusOnline: string;
   offlineStatusBanner: string;
+  startGameBtn: string;
+  howToPlayTitle: string;
+  howToPlayIntro: string;
+  howToPlayRule1: string;
+  howToPlayRule2: string;
+  howToPlayRule3: string;
+  continueBtn: string;
 }
 
 export const translations: Record<LanguageType, TranslationSet> = {
@@ -130,10 +137,17 @@ export const translations: Record<LanguageType, TranslationSet> = {
     bgmPlayingSuccess: "背景音乐开启成功 🎵",
     bgmBypassHint: "请先点击页面任意区域激活，再播放BGM喔！",
     statusOnline: "营业中",
-    offlineStatusBanner: "安全离线剧情模式已激活（云端 AI 额度超出限额 429 或未配置秘钥）：系统已自动无缝切换到本地精心编排的趣味人物对白与分支结算剧本。这完美保障了您的游戏流畅度及顾客攻略成就！您也可以在 Settings > Secrets 面板中，检查配置或更换您的 GEMINI_API_KEY 秘钥。"
+    offlineStatusBanner: "安全离线剧情模式已激活（云端 AI 额度超出限额 429 或未配置秘钥）：系统已自动无缝切换到本地精心编排的趣味人物对白与分支结算剧本。这完美保障了您的游戏流畅度及顾客攻略成就！您也可以在 Settings > Secrets 面板中，检查配置或更换您的 GEMINI_API_KEY 秘钥。",
+    startGameBtn: "开始营业 🏪",
+    howToPlayTitle: "📖 萌萌便利店经营指南",
+    howToPlayIntro: "亲爱的店长，欢迎来到AI萌萌街！在这里，你将管理这家充满人情味的深夜便利店。你需要：",
+    howToPlayRule1: "💡 倾听古怪而有趣的AI顾客们千奇百怪的处境、牢骚和请求。",
+    howToPlayRule2: "🛒 贴心地用快捷客气话，或者手工输入你想说的心灵鸡汤；同时在货架上挑选最完美的零食/物品送给他们！",
+    howToPlayRule3: "📈 努力提升客人们的【好感满意度】（初始50分）。达到100分即获胜；若降低至30分以下会开启店铺危急警报，降至0分便利店将宣告破产倒闭哦！",
+    continueBtn: "好的，点击继续 🚀"
   },
   en: {
-    gameName: "AI Moe Convenience Store",
+    gameName: "AI Moe Moe Convenience Store",
     gameSubtitle: "An AI-powered cartoon convenience store simulation game driven by Google Sheets",
     satisfactionLabel: "Store's Overall Satisfaction: ",
     criticalThreshold: "💔 Critical Under 30%",
@@ -195,10 +209,17 @@ export const translations: Record<LanguageType, TranslationSet> = {
     bgmPlayingSuccess: "BGM started successfully 🎵",
     bgmBypassHint: "Please click anywhere on the page to activate before playing BGM!",
     statusOnline: "Open",
-    offlineStatusBanner: "Safe Offline Story Mode Activated (Cloud AI quota exceeded 429 or key unconfigured): The system has seamlessly switched to built-in humorous characters' dialogs and branching resolution scripts. This guarantees smooth gameplay! You can also check or change your GEMINI_API_KEY inside Settings > Secrets."
+    offlineStatusBanner: "Safe Offline Story Mode Activated (Cloud AI quota exceeded 429 or key unconfigured): The system has seamlessly switched to built-in humorous characters' dialogs and branching resolution scripts. This guarantees smooth gameplay! You can also check or change your GEMINI_API_KEY inside Settings > Secrets.",
+    startGameBtn: "Start Shift 🏪",
+    howToPlayTitle: "📖 AI Moe Moe Convenience Store Handbook",
+    howToPlayIntro: "Dear Manager, welcome to Moe Moe Street! You will be running this cozy late-night AI Moe Moe Convenience Store. Your duties:",
+    howToPlayRule1: "💡 Listen to the funny problems, gossips and stories of our quirky AI customers.",
+    howToPlayRule2: "🛒 Comfort them with customized replies, and pick the perfect merchandise/snack from the shelf to pack as gifts!",
+    howToPlayRule3: "📈 Maintain high [Satisfaction] (starts at 50%). Reaching 100 achieves complete victory, but falling under 30 sounds critical alarms, and hitting 0 results in bankruptcy!",
+    continueBtn: "Let's Start 🚀"
   },
   ko: {
-    gameName: "AI 모에 편의점",
+    gameName: "AI 모에 모에 편의점",
     gameSubtitle: "구글 스프레드시트 데이터로 연동되는 소소한 카툰 AI 고객 시뮬레이션 경영 게임",
     satisfactionLabel: "편의점 전체 만족도: ",
     criticalThreshold: "💔 위기 30% 이하",
@@ -260,7 +281,14 @@ export const translations: Record<LanguageType, TranslationSet> = {
     bgmPlayingSuccess: "배경음악 재생이 시작되었습니다 🎵",
     bgmBypassHint: "브라우저 보안 규칙에 따라 화면을 먼저 가볍게 터치한 뒤 사용 가능합니다!",
     statusOnline: "영업 중",
-    offlineStatusBanner: "오프라인 특별 시나리오 모드가 즉시 연결되었습니다 (클라우드 AI 할당량이 초과되었거나 API 인증키가 누락됨): 게임 안정성을 위해 내장된 유머러스한 로컬 시나리오 대사집과 분기 계산 스크립트로 자동 안착되었습니다. 쾌적한 플레이가 보장됩니다! 언제든 Settings > Secrets 코너에서 GEMINI_API_KEY를 상세 점검해 보세요."
+    offlineStatusBanner: "오프라인 특별 시나리오 모드가 즉시 연결되었습니다 (클라우드 AI 할당량이 초과되었거나 API 인증키가 누락됨): 게임 안정성을 위해 내장된 유머러스한 로컬 시나리오 대사집과 분기 계산 스크립트로 자동 안착되었습니다. 쾌적한 플레이가 보장됩니다! 언제든 Settings > Secrets 코너에서 GEMINI_API_KEY를 상세 점검해 보세요.",
+    startGameBtn: "편의점 문 열기 🏪",
+    howToPlayTitle: "📖 AI 모에 모에 편의점 가이드북",
+    howToPlayIntro: "친애하는 점장님, 모에 모에 스트리트에 오신 것을 환영합니다! 아늑한 심야 AI 모에 모에 편의점을 직접 꾸리고 경영하게 됩니다. 행동 지침:",
+    howToPlayRule1: "💡 개성만점 재미있는 AI 고객들의 복잡하고 귀여운 사정과 푸념을 귀담아 들어보세요.",
+    howToPlayRule2: "🛒 친절한 대화나 위로의 말을 직접 입력하고, 진열대에서 고객 취향에 맞는 과자나 물품을 선물해보세요!",
+    howToPlayRule3: "📈 가게의 전체 [호감 만족도](50%로 시작)를 조율하세요. 100% 클리어 시 극적인 대성공을 맞이하며, 30% 이하로 추락하면 파산 경보가 발동하고, 0% 도달 시 즉시 AI 모에 모에 편의점이 파산 폐업하게 됩니다!",
+    continueBtn: "계속하기 🚀"
   }
 };
 
