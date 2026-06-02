@@ -337,9 +337,6 @@ export default function App() {
     showToast(t.toastSyncing, "info");
     try {
       const res = await fetch("/api/game/config");
-      if (!res.ok) {
-        throw new Error(`Server returned status code ${res.status}`);
-      }
       const data = await res.json();
       console.log("Loaded game config:", data);
       setGameConfig(data);
@@ -352,11 +349,6 @@ export default function App() {
     } catch (err: any) {
       console.error("Config fetch error:", err);
       showToast(t.toastSyncFail, "error");
-      // Fallback configuration to prevent startup hang
-      setGameConfig({ initial: { value: 50 }, fallback: true });
-      if (shouldResetScore) {
-        setSatisfaction(50);
-      }
     } finally {
       setLoadingConfig(false);
     }
