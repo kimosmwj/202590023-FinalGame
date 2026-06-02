@@ -160,18 +160,22 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       description: "穿着复古风衣的超级戏精大叔，说话像经典黑色悬疑电影里的忧郁侦探，对一切便利店食品都抱有极高的怀疑，喜欢把零食当做‘关键物证’审查。",
       offlineDialogues: [
         "（压低帽檐，神色凝重）在这个暗流涌动的深夜，危险总会在温热中现形。我需要一碗看似平静、实则翻滚着大雾且红油交错的‘深夜黄金块’来引诱嫌疑人。店长，你应该知道那是什么证物吧？🍢",
-        "哼……有趣。一件被零下十度完美封印的‘重碳酸神秘玻璃罐’，其上的冷气正顺着瓶身悄然滴落。这就是案发当天的密闭温差线索。店长，如果是你，你会用哪种带冰镇气泡的快乐之水来装裱它？🥤",
-        "在这个罪恶横行的街角，我已经潜伏了足足三个多小时，体温和底牌正在加速流失。我急需一种温热、能在阴暗死角瞬间咽下的‘便携式高能流食’来做我今晚最后的温暖救赎，且决不可引人注目。🕵️‍♂️"
+        "哼……有趣。一件被零下十度完美封印的‘重碳酸神秘玻璃罐’，其上的冷气正顺着瓶身悄然滴落。这就是案发当天的密闭温差线索。店长，如果是你，你会用哪种带冰爽感的神秘饮料来破解此物？🥤",
+        "在这个案情复杂的街角，我已经潜伏了三个多小时，体温直线下滑。我迫切需要一份能温热暖胃、能快速吞咽下去的‘便携高能食物’便当，来获取深夜的救赎。🍱",
+        "（捂着手腕，警惕地扫视四周）刚才跟犯罪嫌疑人角力时被蹭破了皮。我需要一个隐蔽不显眼的‘安心创可贴’给伤口包上。店长，你这儿一定备着这块药布吧？🩹",
+        "（拍了拍大衣上的雨水）夜雨突然大作，蹲守也变成了一场严苛的考验。我需要一把能遮蔽风寒的‘结实雨伞’。🌂"
       ]
     },
     {
       id: 1,
       name: "桃子 (背包旅客)",
-      description: "手拿微单、身背巨大登山包的年轻旅行家。性格随和幽默，总是迷路，对异地便利店的关东煮、便当等抱有极高的新鲜物探寻乐趣。",
+      description: "拿着微单、背着巨大登山包的小姑娘。性格随和幽默，总是迷路，极其喜欢发掘各地的深夜便利店特产。",
       offlineDialogues: [
-        "老板好！指南针在狂转，双腿重得像灌了铅。在这个陌生的夜间交叉路口，我那挑剔的眼睛需要一份最地道、能大口塞满腮帮子提供高热量的‘酱汁便携肉食拼盘’来拯救我。🌋",
+        "老板好！指南针在狂转，双腿重得像灌了铅。在这个陌生的夜间交叉路口，我那挑剔的眼睛需要一份最地道、能大口塞满腮帮子提供高热量的‘酱汁便携肉食拼盘’来拯救我。🍱",
         "（有些颤抖地揉了揉冻僵的小手）今晚为了拍最神秘的星空，我打算等会登顶。然而山上狂风如刀。老板，有没有一种能握在手里源源不断散发热力、同时嘴一吹就能冒着浓香热气的‘高山御寒暖身串串汤’？🍢",
-        "哎呀呀……风光虽好，可是我的相机跟求生机同时发出了红电警报，而我的肚子也在大合唱。我需要一个能够给赛博机器提供续命气血的‘口袋闪充魔盒’，你绝对有这个神奇宝贝吧？🎒"
+        "哎呀呀……风光虽好，可是我的相机跟求生机同时发出了红电警报，而我的肚子也在大合唱。我需要一个能够给赛博机器提供续命气血的‘共享充电宝’，你绝对有这个宝贝吧？🔋",
+        "哎哟……（揉着脚踝）今天为了拍山顶的绝美流星，脚底磨出了大水泡，疼得直不起腰来。老板，有没有防磨透气的‘强效贴心创可贴’？快救救我的脚丫子！🩹",
+        "（牙齿打颤）老板，今晚雪山风暴比我想象中还要恐怖一百倍。我的保温杯已经空了，浑身冻得像根冰棍。求你赏我一杯免费温胃、能捧在手里当暖手宝的热开水，完全不需要任何添加！☕"
       ]
     },
     {
@@ -179,9 +183,11 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       name: "阿豪 (学生)",
       description: "元气满满、性格幽默的运动风男高中学生。极度热衷于学校社团、网络流行梗 and 各类甜食零嘴，酷爱篮球，是个十足的大胃王。",
       offlineDialogues: [
-        "呜哇！老板！手都在不自觉地发抖……刚才在球场迎着落日投出三分，整个人的水分和卡路里几乎要被抽干。急需大口暴饮某种甜腻冰爽、吸入时还带着无敌弹牙Q弹爆珠的‘解压网红魔水’！🏀",
-        "绝了！今天看到那张划满红叉的数学草稿纸，我的灵魂像被封印进了终极冰窖。我迫切需要一种散发着浓郁牛奶果香、能将我糟糕透顶的分数和燥热郁闷进行‘瞬间冷冻结界’的梦幻手持式甜味冰砖！🍨",
-        "网速卡成幻灯片，战场局势极其不妙，而我的灵魂连载工具却仅剩了最后2%的惨存生命值。老板，救命啊！有那种能够让我重新化身为全场超神战胜黑屏魔咒的‘逆转干瘪模块’吗？🔋"
+        "呜哇！老板！手都在不自觉地发抖……刚才在球场迎着落日投出三分，整个人的水分 and 卡路里几乎要被抽干。急需大口暴饮某种甜腻冰爽、吸入时还带着无敌弹牙Q弹爆珠的‘解压网红魔水’！🧋",
+        "绝了！今天看到那张划满红叉的数学草稿纸，我的灵魂像被封印进了终极冰窖.我迫切需要一种散发着浓郁牛奶果香、能将我糟糕透顶的分数和燥热郁闷进行‘瞬间冷冻结界’的梦幻手持式甜味冰砖！🍦",
+        "网速卡成幻灯片，战场局势极其不妙，而我的灵魂连载工具却仅剩了最后2%的惨存生命值。老板，救命啊！有那种能够让我重新化身为全场超神战胜黑屏魔咒的‘逆转干瘪模块’电池吗？🔋",
+        "打完篮球和社团狂欢，肚子直接发出了十级警报！老板，我要来一桶能在三分钟内爆香、热辣翻滚的‘加料方便泡面’，再搭配一罐能冲上天灵盖的极冰镇可乐！今晚大胃王要全火力狂飙！🍜🥤",
+        "（兴奋地跑进来）店长！今晚游戏团战终于拿到了全服第一！请给我一杯‘网红爆料奶茶’和一块浓香鲜奶雪糕，燃烧我的多巴胺！🧋🍦"
       ]
     },
     {
@@ -190,8 +196,10 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       description: "连续加班三天、崩溃边缘的苦逼程序员（白领社畜）。脾气暴躁，极度缺觉，一直吐槽Bug、产品经理 and 不靠谱的服务器。极其需要能解压或果腹的东西。",
       offlineDialogues: [
         "老板！再写不出这个高并发Bug我就要跟产品经理同归于尽了！快！给我拿一份在短短三分钟内、千万玩家见证下只要注入滚烫沸流就能瞬间激发辛辣力量的‘熬夜加班续命法宝’！急！🍜",
-        "（盯着黯淡无光的屏幕发呆）它只剩下1%了，这代表着十二个致命的核心催办通道即将全部被切断。如果店长可以是我的超级救星，请赐予我一个能将‘干瘪虚无的电子黑屏’瞬间重置回活力绿波的赛博便携电浆包吧！🔋",
-        "加班狗不需要优雅，我的咽喉与双胃现在极其空瘪，需要一份装在一次性长方形盒子里的、带有喷香主食、咸鲜酱汁和厚重热量融合的高饱腹‘卡路里炸弹’。老板，不要让我做选择，丢给我就好！🍲"
+        "（盯着黯淡无光的屏幕发呆）它只剩下1%了，这代表着十二个致命的核心催办通道即将全部被切断。如果店长可以是我的超级救星，请赐予我一个能将‘干瘪虚无的电子黑屏’瞬间重置回活力绿波的赛博便携充电宝吧？🔋",
+        "加班狗不需要优雅，我的咽喉与双胃现在极其空瘪，需要一份装在一次性长方形盒子里的、带有喷香主食、咸鲜酱汁和厚重热量融合的高饱腹‘卡路里便当炸弹’。老板，丢给我就好！🍱",
+        "（揉着干燥撕裂的指头）键盘敲了整整十六个小时，指尖都磨开裂了。老板，给我一片能包裹裂口的‘强效创可贴’，再帮我接一杯温暖温胃的‘暖心热开水’，保佑我今晚不要崩了。🩹☕",
+        "天哪……代码刚改完，外面竟然突然哗啦啦下起暴雨！我没带伞，而且饿得饥肠辘辘。店长，快拿一把避雨的便利雨伞 and 一份能塞满肚子的豪华便当，我得赶紧带着电脑滚回家！🌂🍱"
       ]
     }
   ],
@@ -202,8 +210,10 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       description: "A dramatic middle-aged man wearing a vintage trench coat, talking like a melancholy detective in classic noir mystery films. Extremely skeptical of convenience store food, inspecting snacks as 'critical evidence'.",
       offlineDialogues: [
         "(Lowers hat, looks serious) In this dark, turbulent night, danger always reveals itself in the warmth. I need a bowl of seemingly calm, steaming, and red-oil-crossed 'Midnight Golden Cubes' to lure out the suspect. Manager, you know what evidence that represents? 🍢",
-        "Hmph... Interesting. A 'highly carbonated mysterious glass bottle' perfectly sealed at sub-zero temperatures, with cold air quietly dripping down its side. This is the thermal clues of the crime scene. Manager, what carbonated joy-fluid would you use? 🥤",
-        "In this criminal street corner, I've been staking out for over three hours, and my body temperature is dropping. I urgently need a warm, 'portable high-energy food' to swallow quickly to get midnight redemption.🕵️‍♂️"
+        "Hmph... Interesting. A 'highly carbonated mysterious glass bottle' perfectly sealed at sub-zero temperatures, with cold air quietly dripping down its side. This is the thermal clues of the crime scene. Manager, what carbonated joy-fluid cola would you use? 🥤",
+        "In this criminal street corner, I've been staking out for over three hours, and my body temperature is dropping. I urgently need a warm, 'portable high-energy food' to swallow quickly to get midnight redemption.🕵️‍♂️",
+        "(Clutching wrist, scanning surroundings alertly) In the fierce struggle with the suspect just now, my wrist was scraped. I need a secretive piece of 'Care Band-Aid' to wrap the wound. Manager, you have this patch, right? 🩹",
+        "(Shaking rain off coat) Cold rain suddenly poured, and my stakeout is in the open. I urgently need a sturdy 'Umbrella' that blends into the night to block this freezing night rain. 🌂"
       ]
     },
     {
@@ -212,8 +222,10 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       description: "A young traveler holding a mirrorless camera and carrying a huge hiking backpack. Friendly, humorous, always gets lost, loves discovering local convenience store treats like bento.",
       offlineDialogues: [
         "Hello manager! My compass is spinning, legs heavy as lead. At this unfamiliar midnight intersection, my picky eyes need a local, large-bite hearty 'saucy bento box' to save me. 🍱",
-        "(Rubbing frozen hands) I plan to climb to the peak to take photos of the starry sky, but the mountain wind is freezing. Is there a 'warm skewer soup' that keeps heating my hands and mouth? 🍢",
-        "Oh dear... The view is great, but my camera and phone have low-battery alerts, and my stomach is roaring. I need a 'pocket power charging cube' to revive my social signals! 🔋"
+        "(Rubbing frozen hands) I plan to climb to the peak to take photos of the starry sky, but the mountain wind is freezing. Is there a 'warm skewer soup' like oden that keeps heating my hands and mouth? 🍢",
+        "Oh dear... The view is great, but my camera and phone have low-battery alerts, and my stomach is roaring. I need a 'pocket power charging power bank' to revive my social signals! 🔋",
+        "Ouch... (Rubbing ankle) Walked so much to shoot the meteors, got a huge blister on my sole. It hurts to stand. Is there any protective 'Hiking Repair Band-Aid' to wrap it? 🩹",
+        "(Teeth chattering) Manager, the mountain wind is freezing. Please give me a warm cup of 'Pure Hot Water' to hold as a hand warmer! ☕"
       ]
     },
     {
@@ -222,8 +234,10 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       description: "An energetic and humorous high school sport student. Extremely passionate about school clubs, internet memes, and sweets. Loves basketball and has a huge appetite.",
       offlineDialogues: [
         "Whoa, manager! My hands are shaking... Just shot 3-pointers under the sunset and my fluid and calories are completely drained. Urgent need for a sweet, ice-cold 'trendy boba milk tea' with super chewy pearls! 🧋",
-        "Oh man! Looking at that math scratch paper full of red crosses, my soul feels frozen. I need a sweet fruit & milk 'dreamy ice cream brick' to freeze my terrible grade and stress instantly! 🍦",
-        "The network is lagging like a slideshow, match is in critical status, and my phone only has 2% life support. Help! Is there a modules to 'reverse the black screen' doom? 🔋"
+        "Oh man! Looking at that math scratch paper full of red crosses, my soul feels frozen. I need a sweet fruit & milk 'dreamy ice cream' brick to freeze my terrible grade and stress instantly! 🍦",
+        "The network is lagging like a slideshow, match is in critical status, and my phone only has 2% life support. Help! Is there a modules power bank to 'reverse the black screen' doom? 🔋",
+        "After basketball and club carnival, my stomach is screaming! Manager, I want a cup of hot spicy instant noodles, paired with an ice-cold fizzy soda cola! 🍜🥤",
+        "(Runs in excited) Manager! We finally got server first in our guild raid tonight! Give me a 'Trendy Boba Milk Tea' with bubble pearls, and a rich milk 'ice cream'! 🧋🍦"
       ]
     },
     {
@@ -232,8 +246,10 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       description: "A distressed programmer (corporate slave) on the verge of breakdown after working overtime for three days. Hot-tempered, sleep-deprived, constantly complaining about bugs, product managers, and flaky servers.",
       offlineDialogues: [
         "Manager! If I can't fix this concurrency bug, I've to go down with the product manager! Quick, give me the 'overtime lifesaver instant noodle' that cooks with boiling water in three minutes! Urgent! 🍜",
-        "(Staring blankly at the dark screen) Only 1% left, which means twelve critical deployment pipelines are about to be cut off. Please give me a cyber portable power bank to turn that 'cold black screen' back to green! 🔋",
-        "Overtime dogs don't need elegance, my throat and stomach are completely empty. I need a high-calorie bento box with steaming rice, savory sauce, and dense energy. Don't make me choose, just drop it here! 🍱"
+        "(Staring blankly at the dark screen) Only 1% left, which means twelve critical deployment pipelines are about to be cut off. If manager can be my super lifesaver, please grant me a cyber portable power bank to instantly reset this 'dry electronic black screen' back to vitality! 🔋",
+        "Overtime slaves don't need elegance, my throat and stomach are extremely empty right now, I need a high-satiety 'calorie bento bomb' in a single-use rectangular box, with fragrant staple food, salty savory sauce and heavy calorie fusion. Manager, just throw it to me! 🍱",
+        "(Rubbing dry split fingers) Typing on the keyboard for full sixteen hours, my fingertips are cracked. Manager, give me a 'strong band-aid' to wrap the gap, and help me fill a cup of warm 'hot water' to warm my stomach, double bless me from breaking down tonight. 🩹☕",
+        "Oh my... Just finished modifying code, and it suddenly started pouring rain outside! I don't have an umbrella, and my stomach is starving. Manager, quickly bring a 'rain shelter umbrella' and a tummy-filling bento, I must rush home with my laptop! 🌂🍱"
       ]
     }
   ],
@@ -245,7 +261,9 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       offlineDialogues: [
         "(모자를 눌러쓰며 무거운 안색으로) 이 요동치는 어두운 밤, 위험은 따뜻함 속에서 그 모습을 드러내지. 용의자를 유인하기 위해 고요해 보이지만 열기와 고추기름이 가득 엉켜 있는 '심야 황금 조각 오뎅' 한 그릇이 필요하네. 점장, 이것이 어떤 증거물인지 자네는 잘 알고 있겠지? 🍢",
         "흥... 재미있군. 영하 10도의 완벽한 결계 속에 봉인된 '탄산 가득한 신비의 유리병', 그 냉기가 병 표면을 타고 고요히 흘러내리고 있네. 범행 당일의 밀폐 온도 단서지. 점장, 자네라면 이 탄산 가득한 쾌락의 수액을 무엇으로 매칭해 주겠나? 🥤",
-        "죄악이 횡행하는 이 거리 모퉁이에서 벌써 3시간 넘게 잠복해 체온이 떨어지고 있네. 어둠 속에서 조용히 삼킬 수 있는 따뜻한 '휴대용 고에너지 보양 음식'을 긴급 소생 용도로 원하네. 절대 눈에 띄어서는 안 되네. 🕵️‍♂️"
+        "죄악이 횡행하는 이 거리 모퉁이에서 벌써 3시간 넘게 잠복해 체온이 떨어지고 있네. 어둠 속에서 조용히 삼킬 수 있는 따뜻한 '휴대용 고에너지 보양 음식'을 긴급 소생 용도로 원하네. 절대 눈에 띄어서는 안 되네. 🕵️‍♂️",
+        "(속목을 움켜쥐고 주변을 경계하며) 방금 용의자와 격투 중에 손목이 쓸렸네. 자네 편의점에 이 상처를 가려줄 은밀한 '강력 상처 밴드'가 분명 있겠지? 🩹",
+        "(대의의 빗물을 털어내며) 찬 이슬비가 갑자기 쏟아져 잠복이 가혹해지는군. 비바람을 막아줄 튼튼한 '비바람 우산'이 시급하군. 🌂"
       ]
     },
     {
@@ -254,8 +272,10 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       description: "미러리스 카메라를 들고 거대한 배낭을 멘 젊은 여행가. 성격이 쾌활하고 코믹하며, 항상 길을 잃습니다. 낯선 동네 편의점의 숨겨진 보물 음식을 탐험하는 것을 좋아합니다.",
       offlineDialogues: [
         "안녕하세요 사장님! 나침반은 제멋대로 돌고, 다리는 천근만근이네요. 이 낯선 밤거리 교차로에서, 배고픔을 달래줄 기름지고 든든한 '소스 가득한 도시락 영양 플래터'가 간절해요. 🍱",
-        "(약간 떨며 얼어붙은 작은 손을 비비며) 오늘 밤 신비로운 은하수를 찍기 위해 정상에 오를 예정입니다. 하지만 산바람이 칼바람 같네요. 손에 쥐기만 해도 끝없이 온기가 전해지고 따끈한 김이 모락모络 나는 '방한 꼬치구이 국물 오뎅'이 있을까요? 🍢",
-        "아고고... 풍경은 끝내주는데 카메라랑 폰이 동시에 붉은 배터리 경고를 보냈어요. 꼬르륵 소리는 보너스고요! 전자기기에 수명을 불어넣어 줄 '휴대용 초고속 충전기 보조배터리'가 급히 필요합니다! 🔋"
+        "(약간 떨며 얼어붙은 작은 손을 비비며) 오늘 밤 신비로운 은하수를 찍기 위해 정상에 오를 예정입니다. 하지만 산바람이 칼바람 같네요. 손에 쥐기만 해도 끝없이 온기가 전해지고 따끈한 김이 모락모락 나는 '방한 꼬치구이 국물 오뎅'이 있을까요? 🍢",
+        "아고고... 풍경은 끝내주는데 카메라랑 폰이 동시에 붉은 배터리 경고를 보냈어요. 꼬르륵 소리는 보너스고요! 전자기기에 수명을 불어넣어 줄 '휴대용 초고속 충전기 보조배터리'가 급히 필요합니다! 🔋",
+        "아이코... (발목을 움직이며) 오늘 유성을 찍으려고 너무 많이 걸었더니 발바닥에 물집이 심하게 잡혀 걸을 수 없네요. 완벽 밀착되는 '강력 상처 밴드'가 절실해요! 🩹",
+        "(이빨을 부딪치며) 사장님, 오늘 산바람이 온몸을 얼려 냉동 인간을 만들려 하네요. 보온병의 온수도 다 떨어졌으니 온몸을 녹일 따끈한 물 한 잔만 부탁드려요! ☕"
       ]
     },
     {
@@ -265,7 +285,9 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       offlineDialogues: [
         "우와! 사장님! 손이 벌벌 떨려요... 방금 농구장에서 자유투 삼점슛을 엄청 쏘고 오느라 칼로리가 완전히 바닥났어요! 머리가 찡할 정도로 시원하고 쫀득쫀득한 펄이 씹히는 '인기만점 달달 버블 밀크티'를 원해요! 🧋",
         "대박 사건... 오늘 수학 오답 노트를 보고 정상이 아닐 만큼 멘탈이 시베리아처럼 시려요. 기분을 차갑고 달콤하게 식혀줄 농축 생크림 '꿈의 아이스크림'을 던져주세요! 🍦",
-        "인터넷이 슬라이드 쇼처럼 버벅거리고, 팀원 간의 승률 한판도 일촉즉발인데, 폰 배터리는 겨우 2% 생명선에 다다랐습니다. 사장님! 이 블랙스크린 저주에서 구원해 줄 '번개 충전 모듈'이 있겠죠? 🔋"
+        "인터넷이 슬라이드 쇼처럼 버벅거리고, 팀원 간의 승률 한판도 일촉즉발인데, 폰 배터리는 겨우 2% 생명선에 다다랐습니다. 사장님! 이 블랙스크린 저주에서 구원해 줄 '번개 충전 모듈'이 있겠죠? 🔋",
+        "농구가 끝나고 클럽 동아리 활약 후 위장이 완전히 비상 신호를 보냅니다! 뜨끈하게 끓어오르는 '칼칼한라면 라면'이랑 온몸을 자극할 '탄산 가득한 콜라' 주세요! 🍜🥤",
+        "(신나서 뛰어 들어오며) 점장님! 오늘 밤 전 서버 레이드에서 공략 승리로 영광의 1위를 찍었습니다! '인기만점 달달 버블 밀크티'랑 '꿈의 아이스크림' 하나씩 주세요! 🧋🍦"
       ]
     },
     {
@@ -273,41 +295,64 @@ const GUEST_PROFILES_LOCALIZED: Record<string, { id: number; name: string; descr
       name: "장 대리 (회사원)",
       description: "3일 연속 야근으로 인해 분노 조절 폭발 직전에 도달한 불쌍한 프로그래머 회사원. 만성 수면 불량 상태이며 버그와 서비스 기획자, 불안정한 서버를 끊임없이 씹고 있습니다.",
       offlineDialogues: [
-        "사장님! 이 버그 못 잡으면 오늘 진짜 기획자랑 같이 지옥 구경 가게 생げて요! 빨리 끓는 물을 붓기만 하면 3분 만에 화끈한 스프 열기를 뿜어내 수명을 늘려줄 '야근 생명수 라면'을 주세요! 급합니다! 🍜",
+        "사장님! 이 버그 못 잡으면 오늘 진짜 기획자랑 같이 지옥 구경 가게 생겼어요! 빨리 끓는 물을 붓기만 하면 3분 만에 화끈한 스프 열기를 뿜어내 수명을 늘려줄 '야근 생명수 라면'을 주세요! 급합니다! 🍜",
         "(희미해진 개발 화면을 멍하니 보며) 배터리가 딱 1% 남았어요. 프로젝트 긴급 푸시를 전송해야 하는데 충전 전송선 없인 먹통입니다. 점장님, 영혼을 되살려 줄 '사이버 든든 보조배터리'를 부디 제게 투척해 주세요! 🔋",
-        "야근형 인간에겐 격식 따윈 필요치 않습니다. 위장이 비어 괴롭습니다. 일회성 용기에 가득 담긴 소스 듬뿍, 고열량 탄수화물 '칼로리 폭탄 시그니처 도시락'을 주세요. 가릴 처지가 아니니 바로 던져주세요! 🍱"
+        "야근형 인간에겐 격식 따윈 필요치 않습니다. 위장이 비어 괴롭습니다. 일회성 용기에 가득 담긴 소스 듬뿍, 고열량 탄수화물 '칼로리 폭탄 시그니처 도시락'을 주세요. 가릴 처지가 아니니 바로 던져주세요! 🍱",
+        "(피로 가득한 손가락을 문지르며) 키보드를 16시간 동안 타이핑했더니 갈라져 피가 비치네요. 이 틈을 막아줄 '강력 상처 밴드'와 따뜻한 '정성 온수' 한 잔만 타주세요. 🩹☕",
+        "이럴 수가... 코드 버그 다 수정했더니 밖엔 청천벽력 무서운 비가 억수같이 쏟아지네요. 우산도 없는 데다 배도 고릅니다. 비를 완벽히 막아줄 '비바람 우산'이랑 뱃속 든든한 '시그니처 도시락' 하나만 챙겨주세요! 🌂🍱"
       ]
     }
   ]
 };
 
 const GUEST_PROFILES = GUEST_PROFILES_LOCALIZED.zh;
-/*板，有没有一种能握在手里源源不断散发热力、同时嘴一吹就能冒着浓香热气的‘高山御寒暖身串串汤’？🍢",
-      "哎呀呀……风光虽好，可是我的相机跟求生机同时发出了红电警报，而我的肚子也在大合唱。我需要一个能够给赛博机器提供续命气血的‘口袋闪充魔盒’，你绝对有这个神奇宝贝吧？🎒"
-    ]
-  },
-  {
-    id: 2,
-    name: "阿豪 (学生)",
-    description: "元气满满、性格幽默的运动风男高中学生。极度热衷于学校社团、网络流行梗 and 各类甜食零嘴，酷爱篮球，是个十足的大胃王。",
-    offlineDialogues: [
-      "呜哇！老板！手都在不自觉地发抖……刚才在球场迎着落日投出三分，整个人的水分和卡路里几乎要被抽干。急需大口暴饮某种甜腻冰爽、吸入时还带着无敌弹牙Q弹爆珠的‘解压网红魔水’！🏀",
-      "绝了！今天看到那张划满红叉的数学草稿纸，我的灵魂像被封印进了终极冰窖。我迫切需要一种散发着浓郁牛奶果香、能将我糟糕透顶的分数和燥热郁闷进行‘瞬间冷冻结界’的梦幻手持式甜味冰砖！🍨",
-      "网速卡成幻灯片，战场局势极其不妙，而我的灵魂连载工具却仅剩了最后2%的惨存生命值。老板，救命啊！有那种能够让我重新化身为全场超神战胜黑屏魔咒的‘逆转干瘪模块’吗？🔋"
-    ]
-  },
-  {
-    id: 3,
-    name: "老张 (白领社畜)",
-    description: "连续加班三天、崩溃边缘的苦逼程序员（白领社畜）。脾气暴躁，极度缺觉，一直吐槽Bug、产品经理和不靠谱的服务器。极其需要能解压或果腹的东西。",
-    offlineDialogues: [
-      "老板！再写不出这个高并发Bug我就要跟产品经理同归于尽了！快！给我拿一份在短短三分钟内、千万玩家见证下只要注入滚烫沸流就能瞬间激发辛辣力量的‘熬夜加班续命法宝’！急！🍜",
-      "（盯着黯淡无光的屏幕发呆）它只剩下1%了，这代表着十二个致命的核心催办通道即将全部被切断。如果店长可以是我的超级救星，请赐予我一个能将‘干瘪虚无的电子黑屏’瞬间重置回活力绿波的赛博便携电浆包吧！🔋",
-      "加班狗不需要优雅，我的咽喉与双胃现在极其空瘪，需要一份装在一次性长方形盒子里的、带有喷香主食、咸鲜酱汁和厚重热量融合的高饱腹‘卡路里炸弹’。老板，不要让我做选择，丢给我就好！🍲"
-    ]
+
+// Dynamic target item detection scanner based on dialogue text
+function detectTargetItemsFromText(text: string): string[] {
+  const textLower = text.toLowerCase();
+  const discovered: string[] = [];
+  
+  const mappings = [
+    { id: "🍢 关东煮", keywords: ["关东煮", "串串汤", "오뎅", "oden", "skewered"] },
+    { id: "🍱 招牌便当", keywords: ["便当", "도시락", "bento"] },
+    { id: "🍜 劲爽泡面", keywords: ["泡面", "面皇", "라면", "noodles", "noodle"] },
+    { id: "🥤 冰镇可乐", keywords: ["可乐", "콜라", "cola", "汽水"] },
+    { id: "🧋 超浓奶茶", keywords: ["奶茶", "버블티", "milk tea", "boba"] },
+    { id: "🌂 便利雨伞", keywords: ["雨伞", "우산", "umbrella"] },
+    { id: "🩹 强效创可贴", keywords: ["创可贴", "贴纸", "밴드", "band-aid", "patch", "상처 밴드"] },
+    { id: "🔋 共享充电宝", keywords: ["充电宝", "魔盒", "보조배터리", "power bank", "charge", "charging", "电浆包", "电浆"] },
+    { id: "🍦 甜心雪糕", keywords: ["雪糕", "冰砖", "아이스크림", "ice cream", "冰棒", "雪条"] },
+    { id: "☕ 热开水", keywords: ["热开水", "热水", "온수", "hot water", "warm water", "开水", "정성 온수"] },
+    { id: "🍔 芝士汉堡", keywords: ["汉堡", "芝士汉堡", "치즈버거", "burger", "hamburger", "cheeseburger"] },
+    { id: "🍙 蒲烧鳗鱼饭团", keywords: ["饭团", "鳗鱼饭团", "삼각김밥", "onigiri", "rice ball"] },
+    { id: "🍵 浓郁抹茶", keywords: ["抹茶", "말차", "matcha"] },
+    { id: "🥔 酥脆薯片", keywords: ["薯片", "감자칩", "chips", "crisps", "potato chips"] },
+    { id: "🍊 鲜榨橙汁", keywords: ["橙汁", "오렌지주스", "orange juice", "juice"] },
+    { id: "🍫 榛子巧克力", keywords: ["巧克力", "초콜릿", "chocolate", "dark chocolate"] },
+    { id: "🥐 黄油牛角包", keywords: ["牛角", "牛角面包", "猪角包", "크로와상", "croissant"] },
+    { id: "🍉 清甜西瓜汁", keywords: ["西瓜汁", "수박주스", "watermelon", "watermelon juice"] },
+    { id: "🥖 蒜香法棍", keywords: ["法棍", "大蒜面包", "바게트", "baguette", "garlic bread"] },
+    { id: "💊 清凉万金油", keywords: ["万金油", "清凉油", "연고", "balm", "cooling balm", "ointment"] }
+  ];
+  
+  for (const item of mappings) {
+    const matched = item.keywords.some(kw => textLower.includes(kw));
+    if (matched) {
+      discovered.push(item.id);
+    }
   }
-];
-*/
+  
+  // High-availability: guarantee at least 1-2 items are returned as target fallback
+  if (discovered.length === 0) {
+    const shuffled = [...mappings].sort(() => Math.random() - 0.5);
+    discovered.push(shuffled[0].id);
+    if (Math.random() > 0.5) {
+      discovered.push(shuffled[1].id);
+    }
+  }
+  
+  return discovered;
+}
 
 // Fetch CSV from spreadsheet helper
 async function fetchSheetCSV(sheetName: string): Promise<string> {
@@ -468,6 +513,27 @@ app.get("/api/game/config", async (req, res) => {
 });
 
 // 2. Guest targets definition used to compute precise completions in chat
+const ALL_ITEMS = [
+  "🍢 关东煮", "🍱 招牌便当", "🍜 劲爽泡面", "🥤 冰镇可乐", "🧋 超浓奶茶",
+  "🌂 便利雨伞", "🩹 强效创可贴", "🔋 共享充电宝", "🍦 甜心雪糕", "☕ 热开水",
+  "🍔 芝士汉堡", "🍙 蒲烧鳗鱼饭团", "🍵 浓郁抹茶", "🥔 酥脆薯片", "🍊 鲜榨橙汁",
+  "🍫 榛子巧克力", "🥐 黄油牛角包", "🍉 清甜西瓜汁", "🥖 蒜香法棍", "💊 清凉万金油"
+];
+
+const GUEST_ITEMS_POOL: Record<number, string[]> = {
+  0: ["🍢 关东煮", "🥤 冰镇可乐", "☕ 热开水", "🍔 芝士汉堡", "🍙 蒲烧鳗鱼饭团", "🍵 浓郁抹茶", "🥔 酥脆薯片", "🥐 黄油牛角包"], // 林叔 (侦探)
+  1: ["🍱 招牌便当", "🥤 冰镇可乐", "🍢 关东煮", "🌂 便利雨伞", "🔋 共享充电宝", "🍊 鲜榨橙汁", "🥐 黄油牛角包", "🍉 清甜西瓜汁"], // 桃子 (背包客)
+  2: ["🧋 超浓奶茶", "🥤 冰镇可乐", "🍜 劲爽泡面", "🍦 甜心雪糕", "🍱 招牌便当", "🔋 共享充电宝", "🍔 芝士汉堡", "🥔 酥脆薯片", "🍫 榛子巧克力", "🍉 清甜西瓜汁"], // 阿豪 (学生)
+  3: ["🍜 劲爽泡面", "🍱 招牌便当", "🔋 共享充电宝", "☕ 热开水", "🥖 蒜香法棍", "💊 清凉万金油", "🍙 蒲烧鳗鱼饭团", "🍵 浓郁抹茶"] // 老张 (社畜)
+};
+
+function getRandomTargetsForGuest(guestId: number): string[] {
+  const pool = GUEST_ITEMS_POOL[guestId] || GUEST_ITEMS_POOL[0];
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  const count = Math.random() > 0.5 ? 3 : 2;
+  return shuffled.slice(0, count);
+}
+
 const guestItemTargets: Record<number, string[]> = {
   0: ["关东煮", "可乐"], // 林叔 (侦探)
   1: ["便当", "可乐", "关东煮", "雨伞", "充电宝"], // 桃子 (背包客)
@@ -581,6 +647,9 @@ app.post("/api/game/guest-init", async (req, res) => {
     const validatedGuestId = isNaN(guestIdNum) ? 0 : guestIdNum % profiles.length;
     const profile = profiles[validatedGuestId];
 
+    // Generate dynamic target items for this customer episode
+    const targets = getRandomTargetsForGuest(validatedGuestId);
+
     // Select offline dialogue random as baseline
     const randIndex = Math.floor(Math.random() * profile.offlineDialogues.length);
     let speech = profile.offlineDialogues[randIndex];
@@ -603,7 +672,7 @@ app.post("/api/game/guest-init", async (req, res) => {
 ${langInstructions}
 顾客姓名：${profile.name}
 性格背景：${profile.description}
-暗示或直接提及想要的1到2种深夜物品：${(guestItemTargets[validatedGuestId] || []).join("、")}
+暗示或直接提及想要的 ${targets.length} 种深夜物品：${targets.join("、")}
 `,
           config: {
             responseMimeType: "application/json",
@@ -650,7 +719,8 @@ ${langInstructions}
       guestName: profile.name,
       customerSpeech: speech,
       quickReplies: customReplies,
-      offlineBadge: !initializedByAI
+      offlineBadge: !initializedByAI,
+      targets: targets
     });
   } catch (err: any) {
     console.error("Error in guest-init route handler:", err);
@@ -658,12 +728,14 @@ ${langInstructions}
     const fallbackLang = (reqLang === "en" || reqLang === "ko") ? reqLang : "zh";
     const fallbackProfile = GUEST_PROFILES_LOCALIZED[fallbackLang] ? GUEST_PROFILES_LOCALIZED[fallbackLang][0] : GUEST_PROFILES_LOCALIZED.zh[0];
     const targetGuestId = 0;
+    const targets = getRandomTargetsForGuest(targetGuestId);
     return res.json({
       guestId: targetGuestId,
       guestName: fallbackProfile.name,
       customerSpeech: fallbackProfile.offlineDialogues[0],
       quickReplies: getLocalizedOfflineQuickReplies(fallbackLang, targetGuestId),
-      offlineBadge: true
+      offlineBadge: true,
+      targets: targets
     });
   }
 });
@@ -1067,14 +1139,18 @@ function getLocalizedOfflineResponse(
 // 4. Send chat message/items and get satisfaction evaluation
 app.post("/api/game/chat", async (req, res) => {
   try {
-    const { guestId, shopkeeperInput, selectedItems, chatHistory, currentSatisfaction, lang } = req.body;
+    const { guestId, shopkeeperInput, selectedItems, chatHistory, currentSatisfaction, lang, targets: clientTargets } = req.body;
 
     const currentLang = (lang === "en" || lang === "ko") ? lang : "zh";
     const guestIdNum = parseInt(guestId, 10);
     const profiles = GUEST_PROFILES_LOCALIZED[currentLang] || GUEST_PROFILES_LOCALIZED.zh;
     const validatedGuestId = isNaN(guestIdNum) ? 0 : guestIdNum % profiles.length;
     const profile = profiles[validatedGuestId];
-    const targets = guestItemTargets[validatedGuestId] || [];
+    
+    // Honor the dynamic client-driven targets first, fallback to static targets if empty
+    const targets = (clientTargets && Array.isArray(clientTargets) && clientTargets.length > 0)
+      ? clientTargets
+      : (guestItemTargets[validatedGuestId] || []);
 
     // Analyze selected goods matching - ensuring unique, separate target satisfaction
     const selectedList = (selectedItems || []).map((x: any) => String(x).trim());

@@ -275,7 +275,17 @@ export const LOCALIZED_ITEMS: Record<LanguageType, { id: string; name: string; e
     { id: "🩹 强效创可贴", name: "安心创可贴", emoji: "🩹", desc: "防尘透气，温柔包裹大大小小的淘气创口", cost: "¥2" },
     { id: "🔋 共享充电宝", name: "救急充电宝", emoji: "🔋", desc: "手机1%电量救星，让社交信号即刻复活", cost: "¥1.5" },
     { id: "🍦 甜心雪糕", name: "浓香鲜奶雪糕", emoji: "🍦", desc: "一口奶油甜化冰爽，浇灭心中一切无端怒火", cost: "¥4" },
-    { id: "☕ 热开水", name: "爱心热开水", emoji: "☕", desc: "完全免费，暖胃又暖心，最朴实的善意回赠", cost: "免费" }
+    { id: "☕ 热开水", name: "爱心热开水", emoji: "☕", desc: "完全免费，暖胃又暖心，最朴实的善意回赠", cost: "免费" },
+    { id: "🍔 芝士汉堡", name: "爆汁芝士汉堡", emoji: "🍔", desc: "浓郁芝士搭配厚切牛肉排，双重满足的饱腹神器", cost: "¥15" },
+    { id: "🍙 蒲烧鳗鱼饭团", name: "鳗鱼蒲烧饭团", emoji: "🍙", desc: "精选咸甜鳗鱼碎包裹饱满元气米饭，随手充能", cost: "¥6" },
+    { id: "🍵 浓郁抹茶", name: "浓郁手打抹茶", emoji: "🍵", desc: "微苦中回甘的传统抹茶，静心安神、解腻提神", cost: "¥10" },
+    { id: "🥔 酥脆薯片", name: "香脆原味薯片", emoji: "🥔", desc: "薄脆可口，咔嚓作响，看剧加班的解压神器", cost: "¥7" },
+    { id: "🍊 鲜榨橙汁", name: "纯榨橙汁", emoji: "🍊", desc: "整颗鲜橙压榨，满满维生素C，注入满满活力", cost: "¥9" },
+    { id: "🍫 榛子巧克力", name: "榛子黑巧克力", emoji: "🍫", desc: "浓郁坚果醇香，丝滑入口，瞬间拯救低血糖和不开心", cost: "¥12" },
+    { id: "🥐 黄油牛角包", name: "浓香牛角面包", emoji: "🥐", desc: "外皮金黄酥脆，内里层层蓬松，散发黄油香气", cost: "¥8" },
+    { id: "🍉 清甜西瓜汁", name: "极冰西瓜汁", emoji: "🍉", desc: "夏日清凉首选，沙甜多汁，一口喝掉满身燥热", cost: "¥10" },
+    { id: "🥖 蒜香法棍", name: "焦香大蒜面包", emoji: "🥖", desc: "外脆内软的法式长棍，浓郁蒜香让人欲罢不能", cost: "¥6" },
+    { id: "💊 清凉万金油", name: "提神清凉油", emoji: "💊", desc: "居家旅行必备，防蚊止痒，一抹告别熬夜昏睡", cost: "¥5" }
   ],
   en: [
     { id: "🍢 关东煮", name: "Warm Oden", emoji: "🍢", desc: "Heartwarming hot soup and highly aromatic classic skewered items", cost: "$1.5" },
@@ -287,7 +297,17 @@ export const LOCALIZED_ITEMS: Record<LanguageType, { id: string; name: string; e
     { id: "🩹 强效创可贴", name: "Care Band-Aid", emoji: "🩹", desc: "Dustproof, breathable; gently wrapping all sizes of minor clumsy wounds", cost: "$0.4" },
     { id: "🔋 共享充电宝", name: "Rescue Power Bank", emoji: "🔋", desc: "Saves mobile phones on 1% battery, bringing social signals back to life", cost: "$0.3" },
     { id: "🍦 甜心雪糕", name: "Sweet Milk Ice Cream", emoji: "🍦", desc: "One rich creamy bite to extinguish any rising irritation or fire", cost: "$0.9" },
-    { id: "☕ 热开水", name: "Free Hot Water", emoji: "☕", desc: "Warms both your belly and soul, the simplest gesture of care", cost: "Free" }
+    { id: "☕ 热开水", name: "Free Hot Water", emoji: "☕", desc: "Warms both your belly and soul, the simplest gesture of care", cost: "Free" },
+    { id: "🍔 芝士汉堡", name: "Juicy Cheese Burger", emoji: "🍔", desc: "Rich melted cheese paired with a thick beef patty, a double satisfaction burger", cost: "$3.0" },
+    { id: "🍙 蒲烧鳗鱼饭团", name: "Savoury Eel Onigiri", emoji: "🍙", desc: "Salt-sweet eel pieces wrapped in plump rice - a perfect quick charge", cost: "$1.2" },
+    { id: "🍵 浓郁抹茶", name: "Rich Handmade Matcha", emoji: "🍵", desc: "Traditional matcha with a bittersweet aftertaste to calm down and refreshing", cost: "$2.0" },
+    { id: "🥔 酥脆薯片", name: "Crispy Potato Chips", emoji: "🥔", desc: "Thin, crispy and satisfyingly noisy, perfect stress relief for working or watching", cost: "$1.4" },
+    { id: "🍊 鲜榨橙汁", name: "Fresh Squeezed Orange Juice", emoji: "🍊", desc: "Squeezed from whole oranges, packed with Vitamin C to inject lively spirit", cost: "$1.8" },
+    { id: "🍫 榛子巧克力", name: "Hazelnut Dark Chocolate", emoji: "🍫", desc: "Rich nut aroma with smooth entry, immediately saving low blood sugar", cost: "$2.4" },
+    { id: "🥐 黄油牛角包", name: "Butter Croissant", emoji: "🥐", desc: "Golden crispy skin, layers of fluffy pastry filled with pure butter scent", cost: "$1.6" },
+    { id: "🍉 清甜西瓜汁", name: "Ice Watermelon Juice", emoji: "🍉", desc: "Top choice for summer cooling, sand-sweet and extremely refreshing", cost: "$2.0" },
+    { id: "🥖 蒜香法棍", name: "Toasted Garlic Baguette", emoji: "🥖", desc: "Crispy outside and soft inside French bread with strong aromatic garlic", cost: "$1.2" },
+    { id: "💊 清凉万金油", name: "Refreshing Cooling Balm", emoji: "💊", desc: "An absolute essential to relieve itching and stay awake during midnight work", cost: "$1.0" }
   ],
   ko: [
     { id: "🍢 关东煮", name: "따끈 따끈 오뎅", emoji: "🍢", desc: "몸을 녹이는 시원한 수제 육수와 향긋 가득한 한입 어묵 꼬치", cost: "1,500원" },
@@ -299,7 +319,17 @@ export const LOCALIZED_ITEMS: Record<LanguageType, { id: string; name: string; e
     { id: "🩹 强效创可贴", name: "보드라운 상처 밴드", emoji: "🩹", desc: "방수방진 및 우수한 통풍성 - 자잘한 일상 속 귀여운 찰과상 안심 케어", cost: "500원" },
     { id: "🔋 共享充电宝", name: "비상 보조배터리 대여", emoji: "🔋", desc: "스마트폰 배터리 1% 마비 직전 상황을 구조하여 활력을 되찾는 열쇠", cost: "300원" },
     { id: "🍦 甜心雪糕", name: "달콤 생크림 하드형 바", emoji: "🍦", desc: "부드러운 캐러멜 우유 풍미 한 조각 - 복잡했던 스트레스를 사르르 녹입니다", cost: "1,000원" },
-    { id: "☕ 热开水", name: "정성 가득 온수", emoji: "☕", desc: "위장을 보호하며 기운을 감짜 안아 줄 온화한 기운 - 완전 무료 배포", cost: "무료" }
+    { id: "☕ 热开水", name: "정성 가득 온수", emoji: "☕", desc: "위장을 보호하며 기운을 감짜 안아 줄 온화한 기운 - 완전 무료 배포", cost: "무료" },
+    { id: "🍔 芝士汉堡", name: "육즙 폭발 치즈버거", emoji: "🍔", desc: "꾸덕한 치즈와 두툼한 소고기 패티의 조합, 포만감 터지는 든든버거", cost: "3,000원" },
+    { id: "🍙 蒲烧鳗鱼饭团", name: "장어구이 양념삼각김밥", emoji: "🍙", desc: "단짠단짠 장어조각이 듬뿍 들어간 영양 밥그릇 삼각김밥", cost: "1,200원" },
+    { id: "🍵 浓郁抹茶", name: "정통 수제 말차", emoji: "🍵", desc: "쌉싸름하면서도 고소함이 맴도는 전통 말차티, 마음을 가라앉히는 차", cost: "2,000원" },
+    { id: "🥔 酥脆薯片", name: "바삭 오리지널 감자칩", emoji: "🥔", desc: "바삭바삭 소리까지 맛있는 칩, 야근과 넷플릭스 정주행 스트레스 해소제", cost: "1,400원" },
+    { id: "🍊 鲜榨橙汁", name: "생오렌지 착즙 주스", emoji: "🍊", desc: "오렌지를 통째로 짜내어 비타민C 가득, 상큼한 활력 충전", cost: "1,800원" },
+    { id: "🍫 榛子巧克力", name: "헤이즐넛 다크 초콜릿", emoji: "🍫", desc: "고소한 견과류 풍미와 부드러운 초콜릿의 힐링 한 조각", cost: "2,400원" },
+    { id: "🥐 黄油牛角包", name: "크로와상 고소한 빵", emoji: "🥐", desc: "겉바속촉 골든 페이스트리, 풍성한 천연 버터향", cost: "1,600원" },
+    { id: "🍉 清甜西瓜汁", name: "얼음동동 수박 주스", emoji: "🍉", desc: "갈증을 시원하게 해결해줄 여름철 과즙 가득 시각적 힐링 주스", cost: "2,000원" },
+    { id: "🥖 蒜香法棍", name: "마늘향 노릇 바게트", emoji: "🥖", desc: "겉은 바삭하고 속은 부드러운 프랑스 정통 마늘 바게트", cost: "1,200원" },
+    { id: "💊 清凉万金油", name: "졸음방지 시원 만금유", emoji: "💊", desc: "야근 졸음 퇴치 및 모기 물림 완화, 한 번 바르면 정신 번쩍 연고", cost: "1,000원" }
   ]
 };
 
