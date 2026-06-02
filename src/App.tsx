@@ -337,6 +337,9 @@ export default function App() {
     showToast(t.toastSyncing, "info");
     try {
       const res = await fetch("/api/game/config");
+      if (!res.ok) {
+        throw new Error(`Server responded with status ${res.status}`);
+      }
       const data = await res.json();
       console.log("Loaded game config:", data);
       setGameConfig(data);
@@ -347,8 +350,44 @@ export default function App() {
       }
       showToast(t.toastSyncSuccess, "success");
     } catch (err: any) {
-      console.error("Config fetch error:", err);
-      showToast(t.toastSyncFail, "error");
+      console.warn("Config fetch error, applying robust offline fallback scenario:", err);
+      
+      // Complete client-side fallback matching SPREADSHEET_ID / SPREADSHEET layouts
+      const fallbackConfig = {
+        bg: [
+          { state: "0", link: "https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing" },
+          { state: "1", link: "https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing" },
+          { state: "2", link: "https://drive.google.com/file/d/1qeGYv-mAR_xit9ZcdvUO1lyo8c2dYxXP/view?usp=sharing" },
+          { state: "3", link: "https://drive.google.com/file/d/13zt8hos-X6PriyUw_FwuVcbxzLvgL8t-/view?usp=sharing" }
+        ],
+        character: {
+          base: "https://drive.google.com/file/d/1g13V7gc7L8XJy4-M5T2CLH9nOniB7yNJ/view?usp=sharing",
+          states: [
+            { state: "0", link: "https://drive.google.com/file/d/10Cp7j5RgEtfkdsmQEUewh8qt_XM2U4ML/view?usp=sharing", min: 0, max: 30 },
+            { state: "1", link: "None", min: 31, max: 70 },
+            { state: "2", link: "https://drive.google.com/file/d/1wNL5xNn5hjAtrNNtuxZ4gGxFGg62a-WD/view?usp=sharing", min: 71, max: 90 },
+            { state: "3", link: "https://drive.google.com/file/d/1WTDHNugpk5ZKGXFxfW-MMPZ1Qlq3yG1w/view?usp=sharing", min: 91, max: 100 },
+            { state: "clear", link: "https://drive.google.com/file/d/12abPlPGDJTRMtcMtVZhkFsK2VjL2h4fv/view?usp=sharing", min: 100, max: 100 }
+          ]
+        },
+        guests: [
+          { state: "0", link: "https://drive.google.com/file/d/1QtUAYTHKQgr3LLkVgbhoriQ-l3U4KcTx/view?usp=sharing" },
+          { state: "1", link: "https://drive.google.com/file/d/1rzxw8RexI4UyrIKJRHyW4LqS9r9B_w5N/view?usp=sharing" },
+          { state: "2", link: "https://drive.google.com/file/d/14_0TlErm2uLaKMMDaYOa_j7x2kjhnNeQ/view?usp=sharing" },
+          { state: "3", link: "https://drive.google.com/file/d/1ZfNPAe0v8Pzvtchl9dCW5gDRNvNG_Gsz/view?usp=sharing" }
+        ],
+        initial: {
+          bg_state: 0,
+          cha_state: 1,
+          value: 50
+        }
+      };
+      
+      setGameConfig(fallbackConfig);
+      if (shouldResetScore) {
+        setSatisfaction(50);
+      }
+      showToast(t.toastSyncFail ? t.toastSyncFail + " (Using Offline Config Backup)" : "Using Offline Backup Story mode", "info");
     } finally {
       setLoadingConfig(false);
     }
