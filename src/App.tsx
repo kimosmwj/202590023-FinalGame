@@ -626,29 +626,17 @@ export default function App() {
   };
 
   const getBGImageSrc = () => {
-    // Explicit overrides based on satisfaction thresholds to perfectly guarantee the user requested scenes
+    // Explicit overrides based on satisfaction thresholds to perfectly guarantee the user requested scenes:
+    // 1. Under 30: Frozen Store Exhibition / Crisis (冰封营业危机) (https://drive.google.com/file/d/13zt8hos-X6PriyUw_FwuVcbxzLvgL8t-/view?usp=sharing)
+    // 2. 90 or above: Cozy & Bustling Late-Night Store (热闹温馨深夜商店) (https://drive.google.com/file/d/1qeGYv-mAR_xit9ZcdvUO1lyo8c2dYxXP/view?usp=sharing)
+    // 3. 30 to 90: Ordinary Night Store (普通夜晚商店) (https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing)
     if (satisfaction < 30) {
       return getDriveImageUrl("https://drive.google.com/file/d/13zt8hos-X6PriyUw_FwuVcbxzLvgL8t-/view?usp=sharing");
     }
     if (satisfaction >= 90) {
       return getDriveImageUrl("https://drive.google.com/file/d/1qeGYv-mAR_xit9ZcdvUO1lyo8c2dYxXP/view?usp=sharing");
     }
-
-    const key = getBGStateKey();
-    if (!gameConfig || !gameConfig.bg) {
-      // Hardcoded backups in case network fails
-      return getDriveImageUrl("https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing") || "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1000";
-    }
-    const match = gameConfig.bg.find((b: any) => b.state === key);
-    if (match && match.link) {
-      return getDriveImageUrl(match.link);
-    }
-    
-    // Default to the normal scene 0
-    const normalMatch = gameConfig.bg.find((b: any) => b.state === "0");
-    if (normalMatch && normalMatch.link) {
-      return getDriveImageUrl(normalMatch.link);
-    }
+    // Normal / initial 30 to 90: Ordinary Night Store
     return getDriveImageUrl("https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing") || "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1000";
   };
 

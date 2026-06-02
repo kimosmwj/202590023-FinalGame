@@ -125,7 +125,7 @@ const SPREADSHEET_ID = "1JG6Fc18WenhF_05hvHQiOjzh4DIbh5iv3zRIgkK3Lss";
 const DEFAULT_CONFIG = {
   bg: [
     { state: "0", link: "https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing" },
-    { state: "1", link: "https://drive.google.com/file/d/1qeGYv-mAR_xit9ZcdvUO1lyo8c2dYxXP/view?usp=sharing" },
+    { state: "1", link: "https://drive.google.com/file/d/12vjxOHGH1u1jYE-KgwwJbG8DTG5JwZlh/view?usp=sharing" },
     { state: "2", link: "https://drive.google.com/file/d/1qeGYv-mAR_xit9ZcdvUO1lyo8c2dYxXP/view?usp=sharing" },
     { state: "3", link: "https://drive.google.com/file/d/13zt8hos-X6PriyUw_FwuVcbxzLvgL8t-/view?usp=sharing" }
   ],
