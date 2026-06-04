@@ -34,6 +34,7 @@ import {
   getRandomTargetsForGuest,
   getLocalizedOfflineQuickReplies,
   evaluateChatOffline,
+  getOfflineDialogueAndTargets,
   getOfflineTargetsForDialogue
 } from './offlineGameEngine';
 
@@ -450,8 +451,13 @@ export default function App() {
       : "（正在柜台整理货架，微笑欢迎新客人……）";
     setShopkeeperMessage(welcomeMsg);
     
-    // Choose randomized guest state from 0 to 3
-    const nextGuestId = forcedId !== undefined ? forcedId : Math.floor(Math.random() * 4);
+    // Choose randomized guest state from 0 to 3, guaranteeing we swap the customer
+    let nextGuestId = forcedId !== undefined ? forcedId : Math.floor(Math.random() * 4);
+    if (forcedId === undefined && activeGuest && activeGuest.guestId !== undefined) {
+      const currentGuestId = activeGuest.guestId;
+      const candidates = [0, 1, 2, 3].filter(id => id !== currentGuestId);
+      nextGuestId = candidates[Math.floor(Math.random() * candidates.length)];
+    }
 
     // Determine customer rotation count
     const nextCount = isLangChange ? customerCount : (forceResetItems ? 1 : customerCount + 1);
@@ -478,10 +484,10 @@ export default function App() {
         
         const dialogues = currentProfile.offlineDialogues || ["你好！请问有什么推荐吗？"];
         const dialogueIndex = Math.floor(Math.random() * dialogues.length);
-        const customerSpeech = dialogues[dialogueIndex];
-        const targetItems = getOfflineTargetsForDialogue(nextGuestId, dialogueIndex);
+        
+        const { targets: targetItems, customerSpeech } = getOfflineDialogueAndTargets(nextGuestId, dialogueIndex, activeLang);
 
-        const qReplies = getLocalizedOfflineQuickReplies(activeLang, nextGuestId);
+        const qReplies = getLocalizedOfflineQuickReplies(activeLang, nextGuestId, targetItems);
 
         data = {
           guestId: nextGuestId,
@@ -508,12 +514,18 @@ export default function App() {
         const allItems = LOCALIZED_ITEMS[activeLang];
         const allIds = allItems.map(x => x.id);
         
-        const targeted = allIds.filter(id => 
-          targetsForGuest.some((t: string) => id.includes(t) || t.includes(id))
-        );
-        const others = allIds.filter(id => 
-          !targetsForGuest.some((t: string) => id.includes(t) || t.includes(id))
-        );
+        // Robust targeted matching guarantee
+        const targeted: string[] = [];
+        for (const t of targetsForGuest) {
+          const foundId = allIds.find(id => id === t || id.includes(t) || t.includes(id));
+          if (foundId) {
+            if (!targeted.includes(foundId)) {
+              targeted.push(foundId);
+            }
+          }
+        }
+        
+        const others = allIds.filter(id => !targeted.includes(id));
         
         let finalRotatedIds: string[] = [];
         let attempts = 0;
@@ -558,19 +570,23 @@ export default function App() {
     } catch (e) {
       console.error("Failed to fetch customer initialization:", e);
       
-      const targetsForGuest = getOfflineTargetsForDialogue(nextGuestId, 0);
+      const { targets: targetsForGuest, customerSpeech: fbSpeech } = getOfflineDialogueAndTargets(nextGuestId, 0, activeLang);
       setCurrentTargets(targetsForGuest);
 
       // Trigger items rotation in catch block too
       const allItems = LOCALIZED_ITEMS[activeLang];
       const allIds = allItems.map(x => x.id);
       
-      const targeted = allIds.filter(id => 
-        targetsForGuest.some((t: string) => id.includes(t) || t.includes(id))
-      );
-      const others = allIds.filter(id => 
-        !targetsForGuest.some((t: string) => id.includes(t) || t.includes(id))
-      );
+      const targeted: string[] = [];
+      for (const t of targetsForGuest) {
+        const foundId = allIds.find(id => id === t || id.includes(t) || t.includes(id));
+        if (foundId) {
+          if (!targeted.includes(foundId)) {
+            targeted.push(foundId);
+          }
+        }
+      }
+      const others = allIds.filter(id => !targeted.includes(id));
       
       const selectedTargeted = [...targeted];
       const remainingCount = 8 - selectedTargeted.length;
@@ -581,11 +597,6 @@ export default function App() {
 
       // Fallback
       const fbGuestName = activeLang === "en" ? `Mystic Regular ${nextGuestId}` : activeLang === "ko" ? `신비한 단골 ${nextGuestId}` : `神秘常客 ${nextGuestId}`;
-      const fbSpeech = activeLang === "en" 
-        ? "Manager! I heard you have everything here, please recommend something sweet to warm me up!" 
-        : activeLang === "ko" 
-        ? "점장님! 들리는 소문에 이곳 물건이 아주 풍성하다던데, 몸을 훈훈하게 해줄 특별한 걸로 추천해 주시겠어요?" 
-        : "老板！听说你们店里商品很全，快给我推荐点特别的东西暖暖身子！";
       
       setActiveGuest({
         guestId: nextGuestId,
@@ -594,7 +605,7 @@ export default function App() {
       });
       setCustomerMessage(fbSpeech);
       setCustomerFeeling(activeLang === "en" ? "👀 Expectant" : activeLang === "ko" ? "👀 기대" : "👀 期待");
-      setQuickReplies(LOCALIZED_QUIC_REPLIES[activeLang] || []);
+      setQuickReplies(getLocalizedOfflineQuickReplies(activeLang, nextGuestId, targetsForGuest));
       setChatHistory([{ sender: 'customer', text: fbSpeech }]);
     } finally {
       setLoadingGuest(false);

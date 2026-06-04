@@ -558,9 +558,89 @@ const GUEST_OFFLINE_TARGETS: Record<number, Record<number, string[]>> = {
   }
 };
 
+const LOCAL_ITEM_NAMES: Record<string, Record<string, string>> = {
+  "🍢 关东煮": { zh: "🍢 关东煮", en: "🍢 Warm Oden", ko: "🍢 따끈 따끈 오뎅" },
+  "🍱 招牌便当": { zh: "🍱 招牌便当", en: "🍱 Signature Bento", ko: "🍱 시그니처 영양 도시락" },
+  "🍜 劲爽泡面": { zh: "🍜 劲爽泡面", en: "🍜 Gourmet Noodles", ko: "🍜 심야 야식 얼큰 라면" },
+  "🥤 冰镇可乐": { zh: "🥤 冰镇可乐", en: "🥤 Chilled Cola", ko: "🥤 아이스 탄산 콜라" },
+  "🧋 超浓奶茶": { zh: "🧋 超浓奶茶", en: "🧋 Supreme Milk Tea", ko: "🧋 밀크 버블티" },
+  "🌂 便利雨伞": { zh: "🌂 便利雨伞", en: "🌂 Sturdy Umbrella", ko: "🌂 내구성 비바람 우산" },
+  "🩹 强效创可贴": { zh: "🩹 强效创可贴", en: "🩹 Care Band-Aid", ko: "🩹 보드라운 상처 밴드" },
+  "🔋 共享充电宝": { zh: "🔋 共享充电宝", en: "🔋 Rescue Power Bank", ko: "🔋 비상 보조배터리 대여" },
+  "🍦 甜心雪糕": { zh: "🍦 甜心雪糕", en: "🍦 Sweet Milk Ice Cream", ko: "🍦 달콤 생크림 하드형 바" },
+  "☕ 热开水": { zh: "☕ 热开水", en: "☕ Free Hot Water", ko: "☕ 정성 가득 온수" },
+  "🍔 芝士汉堡": { zh: "🍔 芝士汉堡", en: "🍔 Juicy Cheese Burger", ko: "🍔 특제 더블 치즈버거" },
+  "🍙 蒲烧鳗鱼饭团": { zh: "🍙 蒲烧鳗鱼饭团", en: "🍙 Savoury Eel Onigiri", ko: "🍙 양념 장어 주먹밥" },
+  "🍵 浓郁抹茶": { zh: "🍵 浓郁抹茶", en: "🍵 Rich Handmade Matcha", ko: "🍵 진한 녹차 분말차" },
+  "🥔 酥脆薯片": { zh: "🥔 酥脆薯片", en: "🥔 Crispy Potato Chips", ko: "🥔 가스 압축 감자칩" },
+  "🍊 鲜榨橙汁": { zh: "🍊 鲜榨橙汁", en: "🍊 Fresh Squeezed Orange Juice", ko: "🍊 생과일 오렌지 착즙" },
+  "🍫 榛子巧克力": { zh: "🍫 榛子巧克力", en: "🍫 Hazelnut Black Chocolate", ko: "🍫 견과류 다크 초콜릿" },
+  "🥐 黄油牛角包": { zh: "🥐 黄油牛角包", en: "🥐 Butter Croissant", ko: "🥐 버터 크루아상 롤" },
+  "🍉 清甜西瓜汁": { zh: "🍉 清甜西瓜汁", en: "🍉 Ice Watermelon Juice", ko: "🍉 수박 얼음 주스" },
+  "🥖 蒜香法棍": { zh: "🥖 蒜香法棍", en: "🥖 Toasted Garlic Baguette", ko: "🥖 갈릭 소스 바게트" },
+  "💊 清凉万金油": { zh: "💊 清凉万金油", en: "💊 Refreshing Cooling Balm", ko: "💊 진통 소염 만능 만금유" }
+};
+
 function getOfflineTargetsForDialogue(guestId: number, dialogueIndex: number): string[] {
   const guestRecords = GUEST_OFFLINE_TARGETS[guestId] || GUEST_OFFLINE_TARGETS[0];
   return guestRecords[dialogueIndex] || ["🍢 关东煮", "🥤 冰镇可乐"];
+}
+
+function getOfflineDialogueAndTargets(
+  guestId: number, 
+  dialogueIndex: number, 
+  lang: string
+): { targets: string[]; customerSpeech: string } {
+  const currentLang = (lang === "en" || lang === "ko") ? lang : "zh";
+  const profilesList = GUEST_PROFILES_LOCALIZED[currentLang] || GUEST_PROFILES_LOCALIZED.zh;
+  const currentProfile = profilesList[guestId % profilesList.length] || profilesList[0];
+  const dialogues = currentProfile.offlineDialogues || ["你好！请问有什么推荐吗？"];
+  const dialogueIndexClamped = dialogueIndex % dialogues.length;
+  const customerSpeechBase = dialogues[dialogueIndexClamped];
+
+  const guestRecords = GUEST_OFFLINE_TARGETS[guestId] || GUEST_OFFLINE_TARGETS[0];
+  const baseTargets = [...(guestRecords[dialogueIndexClamped] || ["🍢 关东煮", "🥤 冰镇可乐"])];
+
+  // Randomly increase required items by 1 to 2 over several rounds to raise difficulty
+  const augmentedTargets = [...baseTargets];
+  let finalSpeech = customerSpeechBase;
+
+  if (Math.random() < 0.5) {
+    const rawPool = [
+      "🍢 关东煮", "🍱 招牌便当", "🍜 劲爽泡面", "🥤 冰镇可乐", "🧋 超浓奶茶",
+      "🌂 便利雨伞", "🩹 强效创可贴", "🔋 共享充电宝", "🍦 甜心雪糕", "☕ 热开水",
+      "🍔 芝士汉堡", "🍙 蒲烧鳗鱼饭团", "🍵 浓郁抹茶", "🥔 酥脆薯片", "🍊 鲜榨橙汁",
+      "🍫 榛子巧克力", "🥐 黄油牛角包", "🍉 清甜西瓜汁", "🥖 蒜香法棍", "💊 清凉万金油"
+    ];
+    const candidates = rawPool.filter(x => !baseTargets.includes(x));
+    const extraCount = Math.random() < 0.5 ? 1 : 2;
+    const shuffled = candidates.sort(() => Math.random() - 0.5);
+    const extras = shuffled.slice(0, extraCount);
+
+    if (extras.length > 0) {
+      augmentedTargets.push(...extras);
+      
+      const extraNames = extras.map(id => {
+        const trNode = LOCAL_ITEM_NAMES[id];
+        return trNode ? trNode[currentLang] : id;
+      });
+
+      let suffix = "";
+      if (currentLang === "en") {
+        suffix = `\n(Also, could you please also prepare: ${extraNames.join(", ")}?)`;
+      } else if (currentLang === "ko") {
+        suffix = `\n(그리고 혹시 ${extraNames.join(", ")}도 추가로 같이 챙겨주시겠어요?)`;
+      } else {
+        suffix = `\n（另外，能顺便帮我拿一下：${extraNames.join("、")} 吗？）`;
+      }
+      finalSpeech += suffix;
+    }
+  }
+
+  return {
+    targets: augmentedTargets,
+    customerSpeech: finalSpeech
+  };
 }
 
 function getRandomTargetsForGuest(guestId: number): string[] {
@@ -578,96 +658,127 @@ const guestItemTargets: Record<number, string[]> = {
 };
 
 // Offset-based local quick replies fallback mapping
-function getLocalizedOfflineQuickReplies(lang: string, guestId: number): string[] {
+function getItemDisplayName(targetId: string, lang: string): string {
   const currentLang = (lang === "en" || lang === "ko") ? lang : "zh";
+  const trNode = LOCAL_ITEM_NAMES[targetId];
+  if (trNode) {
+    return trNode[currentLang] || targetId;
+  }
+  return targetId;
+}
+
+function joinItemsLocalized(items: string[], lang: string): string {
+  const currentLang = (lang === "en" || lang === "ko") ? lang : "zh";
+  const displayNames = items.map(id => getItemDisplayName(id, currentLang));
+  if (displayNames.length === 0) {
+    return currentLang === "en" ? "everything" : currentLang === "ko" ? "선택한 모든 상품" : "所需的所有商品";
+  }
+  if (displayNames.length === 1) return displayNames[0];
+  if (currentLang === "en") {
+    if (displayNames.length === 2) return `${displayNames[0]} and ${displayNames[1]}`;
+    return `${displayNames.slice(0, -1).join(", ")}, and ${displayNames[displayNames.length - 1]}`;
+  } else if (currentLang === "ko") {
+    return displayNames.join(", ");
+  } else {
+    return displayNames.join("和");
+  }
+}
+
+function getLocalizedOfflineQuickReplies(lang: string, guestId: number, targets?: string[]): string[] {
+  const currentLang = (lang === "en" || lang === "ko") ? lang : "zh";
+  const finalTargets = (targets && targets.length > 0) ? targets : getOfflineTargetsForDialogue(guestId, 0);
+
+  const joinedItems = joinItemsLocalized(finalTargets, currentLang);
+  const firstItem = getItemDisplayName(finalTargets[0] || "🍢 关东煮", currentLang);
+
   if (currentLang === "en") {
     if (guestId === 0) {
       return [
-        "Uncle Lin, is there any suspicious movement on the quiet street tonight? 🕵️‍♂️",
-        "No rush, Uncle Lin! Let me check the clues of this incident for you! 🔎",
-        "Drink some cold cola first and eat warm oden to boost your brain cells! 🍢",
-        "Leave all the evidence at the crime scene to me, Boss! 👌"
+        `Uncle Lin, long night on patrol! Your ${joinedItems} is packed and ready to boost those detective cells! 🕵️‍♂️`,
+        `Crime scene clue crisis! Take these specially prepared ${joinedItems}, the truth is yours to discover! 🔎`,
+        `We just stocked fresh ${joinedItems}, all prepared for you! Master detective, have a brilliant night! 🍢`,
+        `The peace of this silent street depends on you! Grab your ${firstItem} and set off, best of luck! 👌`
       ];
     } else if (guestId === 1) {
       return [
-        "Taozi! Long time no see! Hurry up inside and get warm! 🎒",
-        "Out of battery? Here is a rescue power bank and signature bento! 🔋",
-        "Keep warm! Eat something hot, don't eat ice cream! 🍦",
-        "Wow! What exciting hiking stories do you have this time? 🗺️"
+        `Taozi, welcome back from the wild! Your ${joinedItems} is ready, come inside and get warm! 🎒`,
+        `Shivering and out of battery? Shove in this warm ${joinedItems}, you'll be fully recharged in seconds! 🔋`,
+        `Fresh and tasty ${joinedItems} is fully served! Energy booster unlocked, can't wait to hear your hiking stories! 🗺️`,
+        `Your requested ${firstItem} is a bestseller! Stay safe and warm out there, we've got your back! 🧥`
       ];
     } else if (guestId === 2) {
       return [
-        "A-Hao! Are you staying up late to rank up on the ladder again? 🎮",
-        "Super milk tea and spicy instant noodles are ready, good luck in your match! 🥤",
-        "Just done with basketball? Have cold cola or ice cream, not hot water! ⚡",
-        "Can't run out of battery! Plug into the power bank, signal must go on! 🔋"
+        `A-Hao, ladder grinding again tonight? Your ${joinedItems} is ready, wish you an absolute win streak! 🎮`,
+        `Just finished sports? This chilled/tasty ${joinedItems} is perfect for energy respawn! Enjoy! ⚡`,
+        `Legendary HP recovery kit and power bank: ${joinedItems} are here! Go smash that lobby and carry! 🥤`,
+        `I have prepared your ${firstItem} at the counter! Say goodbye to running out of battery or hunger! 🔋`
       ];
     } else {
       return [
-        "Mr. Zhang, working late again tonight, it's really not easy... 💼",
-        "Hot instant noodles and deluxe bento are fresh out of the pot, power up! 🍱",
-        "Battery at 1%? This power bank will bring your phone back to life! 🔋",
-        "Take a deep breath. Boss making fake promises? I've got your back! 💪"
+        `Mr. Zhang, working late again, respect! Here is hot ${joinedItems} to sweep your exhaustion away! 💼`,
+        `Is the project manager painting false promises again? Take your ${joinedItems} first, let's fix those bugs! 📲`,
+        `The ultimate comfort harbor for overtime coders! Your warm ${joinedItems} is ready, stay strong! ☕`,
+        `Low battery and empty stomach? Take this lifesaving ${firstItem}, full carbon energy restore! 💪`
       ];
     }
   } else if (currentLang === "ko") {
     if (guestId === 0) {
       return [
-        "임 아저씨, 오늘 밤 뒷동네 골목길에 수상한 소리가 있나요? 🕵️‍♂️",
-        "서두르지 마세요, 임 아저씨! 조수처럼 수사 단서를 캐내 볼게요! 🔎",
-        "일단 시원한 콜라와 뜨끈뜨끈한 오뎅을 드시며 두뇌를 회복해 보세요! 🍢",
-        "걱정 접으세요! 이 현장의 의문점들은 모두 제가 함께 할 테니까요! 👌"
+        `임 아저씨, 이 늦은 시간까지 수사하시느라 고생 많으십니다! 요청하신 ${joinedItems} 대기 완료했습니다! 🕵️‍♂️`,
+        `사건 현장의 미스터리 해결을 돕기 위해 특별히 마련한 ${joinedItems} 입니다! 진실을 밝혀내 주십시오! 🔎`,
+        `따끈끈 우동통 오뎅 ${joinedItems}을(를) 정성껏 준비했습니다! 최고의 명탐정님, 오늘도 화이팅! 🍢`,
+        `임 아저씨, 우리 동네 안전은 역시 아저씨 덕분이죠! 든든하게 ${firstItem} 챙겨서 출발하세요! 👌`
       ];
     } else if (guestId === 1) {
       return [
-        "타오즈! 대단히 오랜만이네요! 얼른 안으로 들어와 차가운 몸을 녹이세요! 🎒",
-        "배터리가 부족하신가요? 긴급 보조배터리와 든든한 도시락이 대기 중입니다! 🔋",
-        "감기 걸려요! 따뜻한 걸 드셔야지 설마 이런 날에 아이스크림을? 🍦",
-        "우와! 이번 배낭 도보 여행에서는 어떤 재미난 사진을 찍으셨나요? 🗺️"
+        `타오즈 씨, 무사히 복귀하셨군요! 요청하신 ${joinedItems} 챙기시고, 얼른 안에서 몸 좀 녹이세요! 🎒`,
+        `감기 전조증상에 전지 충전 위기인가요? 여기 구원의 무기 ${joinedItems} 대령했습니다! 완벽 부활하세요! 🔋`,
+        `갓 준비한 영양 가루 ${joinedItems}이(가) 서비스되었습니다! 다음 모험 여행담을 무척 기대하고 있을게요! 🗺️`,
+        `요청하신 ${firstItem}은(는) 우리 가게 시그니처 꿀조합입니다! 감기 걸리지 않게 안전히 다니세요! 🧥`
       ];
     } else if (guestId === 2) {
       return [
-        "아하오! 오늘도 랭킹전 연승을 달리며 밤샘 티어 올리기 전인가요? 🎮",
-        "달콤 버블밀크티와 얼큰 컵라면이 올스탠바이 중입니다, 가뿐하게 캐리하세요! 🥤",
-        "운동하고 오셨나요? 극강의 차가운 콜라를 추천드릴게요! ⚡",
-        "방전 일보 직전이군요! 스마트하게 마비 신호를 구조하는 배터리입니다! 🔋"
+        `아하오, 오늘 새벽에도 전설적인 연속 캐리전인가요? 요청하신 ${joinedItems} 챙기시고 오늘도 연전연승! 🎮`,
+        `땀 흘려 뛰고 와서 탈진 직전이겠군요! 시원하고 든든한 ${joinedItems}로 게이지 즉시 충전하세요! ⚡`,
+        `극강 가성비의 HP 비상 약상자 ${joinedItems} 도착! 얼른 섭취하시고 캐리존으로 즉시 입장하세요! 🥤`,
+        `주문하신 ${firstItem}은(는) 계산대에 완비되었습니다! 밤샘 플레이 중 배고픔과 배터리 걱정 끝! 🔋`
       ];
     } else {
       return [
-        "장 대리님, 오늘도 이 늦은 시간까지 야근하느라 정말 고생 많으십니다…… 💼",
-        "따끈따끈 라면과 시그니처 도시락이 조리 완료되었습니다, 기운 차리세요! 🍱",
-        "충전이 1%도 정지했군요? 대여용 보조배터리로 빠르게 구조해 드립니다! 🔋",
-        "토닥토닥. 지독한 고압 부장님이 또 괴롭혔나요? 정성을 바칠게요! 💪"
+        `장 대리님, 피를 말리는 극한의 릴리즈 기간이군요! 방금 조리한 ${joinedItems} 대령했습니다, 힘내세요! 💼`,
+        `악마 같은 기획자가 또 말도 안 되는 일정을? 얼른 ${joinedItems} 드시며 긴장을 풀고 버그를 격파하세요! 📲`,
+        `야근 개미분들을 위한 편안한 안식처입니다! 뜨끈한 ${joinedItems}로 심신의 피로를 모두 날려버리세요! ☕`,
+        `보조 충전의 전력난과 헛헛한 마음엔 ${firstItem} 최고의 한 끼! 다시 마우스 쥐고 승리하세요! 💪`
       ];
     }
   } else {
     if (guestId === 0) {
       return [
-        "林叔，听说今晚深夜小街有异常动静？🕵️‍♂️",
-        "别急，林叔！我来帮您密切监视这起事件的蛛丝马迹！🔎",
-        "先喝口冰可乐，吃热热的关东煮，暖和暖和脑细胞吧！🍢",
-        "没问题林叔，案发现场的一切线索，我都给您包下！👌"
+        `林叔，深夜查案辛苦了！您要的 ${joinedItems} 已经打包准备好了，快拿去暖和脑子！ 🕵️‍♂️`,
+        `案声紧迫！这是为您特备的 ${joinedItems}，有它在手，真相必会水落石出！ 🔎`,
+        `店里刚好有新到的 ${joinedItems}，全给您包上了！祝您今晚深夜神勇破案！ 🍢`,
+        `林叔，小街的太平多亏了您！吃暖喝足，带上 ${firstItem} 出发吧，一切顺利！ 👌`
       ];
     } else if (guestId === 1) {
       return [
-        "桃子！真的好久不见！看你冻得直发抖，赶紧进屋解解冻！🎒",
-        "手机彻底没电了吗？救急充电宝和热乎乎的招牌便当都在这里喔！🔋",
-        "小心着凉！赶紧吃点热的，可千万别在这个时候吃雪糕呀！🍦",
-        "哇，这次的户外冒险又有什么惊险刺激的见闻秘境吗？🗺️"
+        `桃子欢迎满载而归！你要的 ${joinedItems} 拿好，赶紧进店里坐下避避风头！ 🎒`,
+        `看你冻得发抖、电量也快空了，温热的 ${joinedItems} 赶紧用上，快快满血复活！ 🔋`,
+        `新鲜热乎的 ${joinedItems} 已经准备完了！热量绝对充足，期待你精彩的下次见闻！ 🗺️`,
+        `你要的 ${firstItem} 可是店里的热卖好物！路上千万小心别受凉，小店随时欢迎你！ 🧥`
       ];
     } else if (guestId === 2) {
       return [
-        "阿豪！今天又是熬夜上分、决战深夜排位的一天吗？🎮",
-        "超农多糖奶茶、劲爽泡面已备齐，祝你战局全胜！🥤",
-        "刚打完球吧？喝口冰镇汽水或者爽爽雪糕，千万别喝热开水！⚡",
-        "电量不足可不行！插上共享充电宝，社交网速妥妥保障！🔋"
+        `阿豪又来狂飙连胜呢？你要的 ${joinedItems} 扫码备好了，祝你今晚排位战无不胜！ 🎮`,
+        `刚运动完太累了吧？这一手 ${joinedItems} 刚好供神级回血，快拿去畅快享受！ ⚡`,
+        `强力能量饮料和回复包：${joinedItems} 在此，一口闷了原地起飞 Carry 全场！ 🥤`,
+        `你要的 ${firstItem} 早就给你安排明白了！全方位保障你的电量和深夜嘴馋！ 🔋`
       ];
     } else {
       return [
-        "张工，今晚又加班到这么晚，为了业绩真的太拼太不容易了……💼",
-        "深夜泡面、招牌便当刚好出锅热好，快趁热坐下满血复活！🍱",
-        "电量只剩下1%？救急充电宝随时为您解除低电量焦虑！🔋",
-        "别委屈啦，老板又在疯狂画大饼？别慌，今晚小铺撑你到底！💪"
+        `张工加班辛苦了，真不容易！刚热好的 ${joinedItems} 赶紧拿去，吃饱才有劲和 Bug 决战！ 💼`,
+        `无良项目经理又催了？先别急，来份 ${joinedItems} 恢复元神，今晚保障绝对顺畅运行！ 📲`,
+        `深夜打工人的超级避难所！暖胃的 ${joinedItems} 已经齐活，胃暖了心也就不寒了！ ☕`,
+        `电量红线、肚子空空？你要的 ${firstItem} 奉上，全家福重碳水帮您瞬间充盈活力！ 💪`
       ];
     }
   }
@@ -747,11 +858,13 @@ ${langInstructions}
     }
 
     if (!initializedByAI) {
-      targets = getOfflineTargetsForDialogue(validatedGuestId, randIndex);
+      const augmented = getOfflineDialogueAndTargets(validatedGuestId, randIndex, currentLang);
+      targets = augmented.targets;
+      speech = augmented.customerSpeech;
     }
 
     if (customReplies.length === 0) {
-      customReplies = getLocalizedOfflineQuickReplies(currentLang, validatedGuestId);
+      customReplies = getLocalizedOfflineQuickReplies(currentLang, validatedGuestId, targets);
     }
 
     return res.json({
@@ -773,7 +886,7 @@ ${langInstructions}
       guestId: targetGuestId,
       guestName: fallbackProfile.name,
       customerSpeech: fallbackProfile.offlineDialogues[0],
-      quickReplies: getLocalizedOfflineQuickReplies(fallbackLang, targetGuestId),
+      quickReplies: getLocalizedOfflineQuickReplies(fallbackLang, targetGuestId, targets),
       offlineBadge: true,
       targets: targets
     });
