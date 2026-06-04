@@ -29,6 +29,12 @@ import {
   LOCALIZED_ITEMS, 
   LOCALIZED_QUIC_REPLIES 
 } from './translations';
+import { 
+  GUEST_PROFILES_LOCALIZED,
+  getRandomTargetsForGuest,
+  getLocalizedOfflineQuickReplies,
+  evaluateChatOffline 
+} from './offlineGameEngine';
 
 // Shelf items interface
 interface ShelfItem {
@@ -453,12 +459,39 @@ export default function App() {
     }
 
     try {
-      const response = await fetch("/api/game/guest-init", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ guestId: nextGuestId, lang: activeLang })
-      });
-      const data = await response.json();
+      let data;
+      try {
+        const response = await fetch("/api/game/guest-init", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ guestId: nextGuestId, lang: activeLang })
+        });
+        if (!response.ok) {
+          throw new Error(`Server returned status ${response.status}`);
+        }
+        data = await response.json();
+      } catch (fetchErr) {
+        console.warn("API guest-init call failed, running robust client offline generator:", fetchErr);
+        const targetItems = getRandomTargetsForGuest(nextGuestId);
+        const profilesList = GUEST_PROFILES_LOCALIZED[activeLang] || GUEST_PROFILES_LOCALIZED.zh;
+        const currentProfile = profilesList[nextGuestId % profilesList.length];
+        
+        const dialogues = currentProfile.offlineDialogues || ["你好！请问有什么推荐吗？"];
+        const dialogueIndex = Math.floor(Math.random() * dialogues.length);
+        const customerSpeech = dialogues[dialogueIndex];
+
+        const qReplies = getLocalizedOfflineQuickReplies(activeLang, nextGuestId);
+
+        data = {
+          guestId: nextGuestId,
+          guestName: currentProfile.name,
+          customerSpeech: customerSpeech,
+          targets: targetItems,
+          quickReplies: qReplies,
+          offlineBadge: true
+        };
+      }
+
       setActiveGuest(data);
       setCustomerMessage(data.customerSpeech);
       
@@ -626,21 +659,36 @@ export default function App() {
     ];
 
     try {
-      const res = await fetch("/api/game/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          guestId: activeGuest.guestId,
-          shopkeeperInput: responseText,
-          selectedItems: selectedItems,
-          chatHistory: updatedHistory,
-          currentSatisfaction: satisfaction,
+      let feedback;
+      try {
+        const res = await fetch("/api/game/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            guestId: activeGuest.guestId,
+            shopkeeperInput: responseText,
+            selectedItems: selectedItems,
+            chatHistory: updatedHistory,
+            currentSatisfaction: satisfaction,
+            lang,
+            targets: currentTargets
+          })
+        });
+        if (!res.ok) {
+          throw new Error(`Server returned status ${res.status}`);
+        }
+        feedback = await res.json();
+      } catch (chatError) {
+        console.warn("API /api/game/chat failed, running high-fidelity client scoring algorithm:", chatError);
+        feedback = evaluateChatOffline(
+          activeGuest.guestId,
+          responseText,
+          selectedItems,
+          satisfaction,
           lang,
-          targets: currentTargets
-        })
-      });
-
-      const feedback = await res.json();
+          currentTargets
+        );
+      }
       
       // Update customer text bubble
       setCustomerMessage(feedback.customerReply);
