@@ -33,7 +33,8 @@ import {
   GUEST_PROFILES_LOCALIZED,
   getRandomTargetsForGuest,
   getLocalizedOfflineQuickReplies,
-  evaluateChatOffline 
+  evaluateChatOffline,
+  getOfflineTargetsForDialogue
 } from './offlineGameEngine';
 
 // Shelf items interface
@@ -472,13 +473,13 @@ export default function App() {
         data = await response.json();
       } catch (fetchErr) {
         console.warn("API guest-init call failed, running robust client offline generator:", fetchErr);
-        const targetItems = getRandomTargetsForGuest(nextGuestId);
         const profilesList = GUEST_PROFILES_LOCALIZED[activeLang] || GUEST_PROFILES_LOCALIZED.zh;
         const currentProfile = profilesList[nextGuestId % profilesList.length];
         
         const dialogues = currentProfile.offlineDialogues || ["你好！请问有什么推荐吗？"];
         const dialogueIndex = Math.floor(Math.random() * dialogues.length);
         const customerSpeech = dialogues[dialogueIndex];
+        const targetItems = getOfflineTargetsForDialogue(nextGuestId, dialogueIndex);
 
         const qReplies = getLocalizedOfflineQuickReplies(activeLang, nextGuestId);
 
@@ -557,15 +558,7 @@ export default function App() {
     } catch (e) {
       console.error("Failed to fetch customer initialization:", e);
       
-      // Hardcoded fallback targets matching nextGuestId if network/backend failed
-      const fallbackTargetIdMap: Record<number, string[]> = {
-        0: ["🍢 关东煮", "🥤 冰镇可乐"],
-        1: ["🍱 招牌便当", "🥤 冰镇可乐", "🍢 关东煮", "🌂 便利雨伞", "🔋 共享充电宝"],
-        2: ["🧋 超浓奶茶", "🥤 冰镇可乐", "🍜 劲爽泡面", "🍦 甜心雪糕", "🍱 招牌便当", "🔋 共享充电宝"],
-        3: ["🍜 劲爽泡面", "🍱 招牌便当", "🔋 共享充电宝"]
-      };
-      
-      const targetsForGuest = fallbackTargetIdMap[nextGuestId] || [];
+      const targetsForGuest = getOfflineTargetsForDialogue(nextGuestId, 0);
       setCurrentTargets(targetsForGuest);
 
       // Trigger items rotation in catch block too

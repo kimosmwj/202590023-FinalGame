@@ -527,6 +527,42 @@ const GUEST_ITEMS_POOL: Record<number, string[]> = {
   3: ["🍜 劲爽泡面", "🍱 招牌便当", "🔋 共享充电宝", "☕ 热开水", "🥖 蒜香法棍", "💊 清凉万金油", "🍙 蒲烧鳗鱼饭团", "🍵 浓郁抹茶"] // 老张 (社畜)
 };
 
+const GUEST_OFFLINE_TARGETS: Record<number, Record<number, string[]>> = {
+  0: { // Uncle Lin
+    0: ["🍢 关东煮"],
+    1: ["🥤 冰镇可乐"],
+    2: ["🍱 招牌便当"],
+    3: ["🩹 强效创可贴"],
+    4: ["🌂 便利雨伞"]
+  },
+  1: { // Taozi
+    0: ["🍱 招牌便当"],
+    1: ["🍢 关东煮"],
+    2: ["🔋 共享充电宝"],
+    3: ["🩹 强效创可贴"],
+    4: ["☕ 热开水"]
+  },
+  2: { // A-Hao
+    0: ["🧋 超浓奶茶"],
+    1: ["🍦 甜心雪糕"],
+    2: ["🔋 共享充电宝"],
+    3: ["🍜 劲爽泡面", "🥤 冰镇可乐"],
+    4: ["🧋 超浓奶茶", "🍦 甜心雪糕"]
+  },
+  3: { // Lao Zhang
+    0: ["🍜 劲爽泡面"],
+    1: ["🔋 共享充电宝"],
+    2: ["🍱 招牌便当"],
+    3: ["🩹 强效创可贴", "☕ 热开水"],
+    4: ["🌂 便利雨伞", "🍱 招牌便当"]
+  }
+};
+
+function getOfflineTargetsForDialogue(guestId: number, dialogueIndex: number): string[] {
+  const guestRecords = GUEST_OFFLINE_TARGETS[guestId] || GUEST_OFFLINE_TARGETS[0];
+  return guestRecords[dialogueIndex] || ["🍢 关东煮", "🥤 冰镇可乐"];
+}
+
 function getRandomTargetsForGuest(guestId: number): string[] {
   const pool = GUEST_ITEMS_POOL[guestId] || GUEST_ITEMS_POOL[0];
   const shuffled = [...pool].sort(() => Math.random() - 0.5);
@@ -648,7 +684,7 @@ app.post("/api/game/guest-init", async (req, res) => {
     const profile = profiles[validatedGuestId];
 
     // Generate dynamic target items for this customer episode
-    const targets = getRandomTargetsForGuest(validatedGuestId);
+    let targets = getRandomTargetsForGuest(validatedGuestId);
 
     // Select offline dialogue random as baseline
     const randIndex = Math.floor(Math.random() * profile.offlineDialogues.length);
@@ -708,6 +744,10 @@ ${langInstructions}
           console.warn("Gemini init guest speech failed, using offline fallback:", errMsg);
         }
       }
+    }
+
+    if (!initializedByAI) {
+      targets = getOfflineTargetsForDialogue(validatedGuestId, randIndex);
     }
 
     if (customReplies.length === 0) {
