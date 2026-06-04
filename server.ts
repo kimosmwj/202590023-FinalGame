@@ -1343,12 +1343,12 @@ ${langInstructions}
       
       if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
+          change = 14 + dialogueBonus;
           reply = `（利索地把关东煮和冻可乐揽入风衣怀中）迷雾瞬间穿透！极爽且暖彻心底的交织，果然隐藏着安防现场线索的钥匙！两件证物我全收下了。听到店主您刚才的精妙剖析：“${shopkeeperInput}”，简直深得侦探本色！这场深夜对决，我们稳操胜券！`;
           feel = "🕵️‍♂️ 案情彻底侦破";
         } else {
-          change = 15;
-          reply = "（大口享用着关东煮和冻可乐）物资已经全数收集齐全……店长，虽然案发现场的线索补充齐备了，但你从头到尾毫无语言回馈、双手奉物却若无其事地装聋作哑，真是个沉默冷酷的世外高人。";
+          change = 10;
+          reply = "（大口享用着关东煮 and 冻可乐）物资已经全数收集齐全……店长，虽然案发现场的线索补充齐备了，但你从头到尾毫无语言回馈、双手奉物却若无其事地装聋作哑，真是个沉默冷酷的世外高人。";
           feel = "🕵️‍♂️ 拿到证物但店长太冷";
         }
       } else if (correctCount === 1 && wrongCount === 0) {
@@ -1411,11 +1411,11 @@ ${langInstructions}
         }
       } else if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
-          reply = `哇塞！你不仅把我的受冷饱腹问题，连我的微单和手机断电解境，一股脑全都完美解决了！太全能了吧！再加上你跟我说的这番元气叮嘱：“${shopkeeperInput}”，心里狂流暖流，简直是神仙好老板！`;
+          change = 14 + dialogueBonus;
+          reply = `哇塞！你不仅把我的受冷饱腹问题，连我的微单 and 手机断电解境，一股脑全都完美解决了！太全能了吧！再加上你跟我说的这番元气叮嘱：“${shopkeeperInput}”，心里狂流暖流，简直是神仙好老板！`;
           feel = "🏕️ 终极震撼感激";
         } else {
-          change = 16;
+          change = 11;
           reply = "呜哇！热食关东煮加上能提供续命气血的充电魔盒悉数到齐！背包客我满血复活了！只是老板你真的冷冰冰的好酷哦，双手递过物资的时候一言不发，像是个世外冷淡高人。";
           feel = "🎒 双料满分但老板高冷";
         }
@@ -1479,11 +1479,11 @@ ${langInstructions}
         }
       } else if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
+          change = 14 + dialogueBonus;
           reply = `狂点赞！甜爽的可乐奶茶、配上顶饱的便当，还有手机电量全充盈！直接让我原地复活好吗！再加上老哥你刚才说的黑话留言：“${shopkeeperInput}”，简直是不折不扣的青春懂帝！这波体验超神了！`;
           feel = "🥳 绝对狂欢";
         } else {
-          change = 15;
+          change = 10;
           reply = "大口吨吨吨大嚼美食，这也太爽了吧！能量一瞬间补充完毕。不过店长老板你真的超级高冷，全程一言不发像尊大理石雕塑，不过看在美味大满贯的面子上，五星必须给！";
           feel = "🥳 爽快大满贯但老板高冷";
         }
@@ -1547,11 +1547,11 @@ ${langInstructions}
         }
       } else if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
+          change = 14 + dialogueBonus;
           reply = `（眼泪一下子灌到了嘴角）极大份高热量的热食物，加上直接解决电子焦枯的充电法宝！老板你简直就是我的人间救星！胃里夯实，手机充盈，高并发报错算得了什么！尤其是你刚才这番看破生活的吐槽：“${shopkeeperInput}”，一针见血，直击社畜脆弱神经！我太感动了！`;
           feel = "😭 感动到跪下";
         } else {
-          change = 16;
+          change = 11;
           reply = "（手捧热烫便当插上充电宝，大口干饭）这就是深夜苦逼打工人活下去 of 重碳水温软保障！我马上带回地狱工位。只可惜店老板冷若冰霜、连个‘辛苦’都不舍得施舍，真是个大厂般的冰冷铁人。";
           feel = "😭 痛快饱腹但老板太冷";
         }

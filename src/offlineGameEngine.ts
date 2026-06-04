@@ -389,11 +389,11 @@ export function evaluateChatOffline(
       const hasCorrectDialogue = inputLower.includes("侦探") || inputLower.includes("线索") || inputLower.includes("证据") || inputLower.includes("真相") || inputLower.includes("案件") || inputLower.includes("小偷") || inputLower.includes("探案");
       if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
+          change = 14 + dialogueBonus;
           reply = `（利索地把关东煮和冻可乐揽入风衣怀中）迷雾瞬间穿透！极爽且暖彻心底的交织，果然隐藏着安防现场线索的钥匙！两件证物我全收下了。听到店主您刚才的精妙剖析：“${shopkeeperInput}”，简直深得侦探本色！这场深夜对决，我们稳操胜券！`;
           feel = "🕵️‍♂️ 案情彻底侦破";
         } else {
-          change = 15;
+          change = 10;
           reply = "（大口享用着关东煮和冻可乐）物资已经全数收集齐全……店长，虽然案发现场的线索补充齐备了，但你从头到尾毫无语言回馈、双手奉物却若无其事地装聋作哑，真是个沉默冷酷的世外高人。";
           feel = "🕵️‍♂️ 拿到证物但店长太冷";
         }
@@ -455,11 +455,11 @@ export function evaluateChatOffline(
         }
       } else if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
-          reply = `哇塞！你不仅把我的受冷饱腹问题，连我的微单和手机断电解境，一股脑全都完美解决了！太全能了吧！再加上你跟我说的这番元气叮嘱：“${shopkeeperInput}”，心里狂流暖流，简直是神仙好老板！`;
+          change = 14 + dialogueBonus;
+          reply = `哇塞！你不仅把我的受冷饱腹问题，连我的微单 and 手机断电解境，一股脑全都完美解决了！太全能了吧！再加上你跟我说的这番元气叮嘱：“${shopkeeperInput}”，心里狂流暖流，简直是神仙好老板！`;
           feel = "🏕️ 终极震撼感激";
         } else {
-          change = 16;
+          change = 11;
           reply = "呜哇！热食关东煮加上能提供续命气血的充电宝悉数到齐！背包客我满血复活了！只是老板你真的冷冰冰的好酷哦，双手递过物资的时候一言不发，像是个世外冷淡高人。";
           feel = "🎒 双料满分但老板高冷";
         }
@@ -521,11 +521,11 @@ export function evaluateChatOffline(
         }
       } else if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
+          change = 14 + dialogueBonus;
           reply = `狂点赞！甜爽的可乐奶茶、配上顶饱的便当，还有手机电量全充盈！直接让我原地复活好吗！再加上老哥你刚才说的黑话留言：“${shopkeeperInput}”，简直是不折不扣的青春懂帝！这波体验超神了！`;
           feel = "🥳 绝对狂欢";
         } else {
-          change = 15;
+          change = 10;
           reply = "大口吨吨吨大嚼美食，这也太爽了吧！能量一瞬间补充完毕。不过店长老板你真的超级高冷，全程一言不发像尊大理石雕塑，不过看在美味大满贯的面子上，五星必须给！";
           feel = "🥳 爽快大满贯但老板高冷";
         }
@@ -587,11 +587,11 @@ export function evaluateChatOffline(
         }
       } else if (correctCount >= 2 && wrongCount === 0) {
         if (isTalkative) {
-          change = 22 + dialogueBonus;
+          change = 14 + dialogueBonus;
           reply = `（眼泪一下子灌到了嘴角）极大份高热量的热食物，加上直接解决电子焦枯的充电法宝！老板你简直就是我的人间救星！胃里夯实，手机充盈，高并发报错算得了什么！尤其是你刚才这番看破生活的吐槽：“${shopkeeperInput}”，一针见血，直击社畜脆弱神经！我太感动了！`;
           feel = "😭 感动到跪下";
         } else {
-          change = 16;
+          change = 11;
           reply = "（手捧热烫便当插上充电宝，大口干饭）这就是深夜苦逼打工人活下去 of 重碳水温软保障！我马上带回地狱工位。只可惜店老板冷若冰霜、连个‘辛苦’都不舍得施舍，真是个大厂般的冰冷铁人。";
           feel = "😭 痛快饱腹但老板太冷";
         }
@@ -646,7 +646,7 @@ export function evaluateChatOffline(
     if (validatedGuestId === 0) { // Uncle Lin
       const hasCorrectDialogue = inputLower.includes("detective") || inputLower.includes("clue") || inputLower.includes("evidence") || inputLower.includes("truth") || inputLower.includes("case") || inputLower.includes("thief");
       if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 15;
+        change = isTalkative ? 14 + dialogueBonus : 10;
         reply = isTalkative
           ? `(Packing oden and cold cola into windcoat) The night fog is instantly cleared! This perfect hot & cold combo is indeed the key to criminal evidence! I take them both. And your sharp analysis: "${shopkeeperInput}", really matches the detective spirit! We will sweep this case tonight!`
           : `(Eating oden and cold cola) All items gathered... Manager, although the clues of the crime scene are complete, you served me with total silence. You are a silent but legendary professional.`;
@@ -691,7 +691,7 @@ export function evaluateChatOffline(
           : `Whoa! Listening to me shivering from the cold, you stayed silent and served me [Sweet Milk Ice Cream]?! Manager, is this your specialized cold-shoulder treatment? Frozen to the bones!`;
         feel = "🥶 Shivering shivering";
       } else if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 16;
+        change = isTalkative ? 14 + dialogueBonus : 11;
         reply = isTalkative
           ? `Wow! You completely solved my stomach hunger and phone-charging crisis in one go! Super professional! Plus your supportive words: "${shopkeeperInput}", my heart is overflowing with warmth!`
           : `Oh my! The warm oden and charging power bank are all served! I am fully revived! But you are so quiet, serving materials in total silence like a silent ninja.`;
@@ -736,7 +736,7 @@ export function evaluateChatOffline(
           : `Manager! I just finished playing basketball under the scorching sun and almost fainted. You said nothing but shoved a blazing [Hot Water] at me?! Is this a biochemical grandpa training? I need cold ice cream and sweet carbs!`;
         feel = "🥵 Heat Struggle";
       } else if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 15;
+        change = isTalkative ? 14 + dialogueBonus : 10;
         reply = isTalkative
           ? `Super like! The chilled cola, sweet milk tea, and hefty bento are perfect! Made me fully revived! Plus your gamer slang: "${shopkeeperInput}", you are an absolute youth culture expert! This is legendary!`
           : `(Gulping down food and chilling drinks) This is so amazing! Energy restored in seconds. Though you are super quiet, serving in total silence like a cold marble statue, I'll still give you five stars for the delicious feast!`;
@@ -781,7 +781,7 @@ export function evaluateChatOffline(
           : `(Clutching stomach, looks pale) Manager, I have severe chills after working overtime for three days straight. You didn't say a word and threw a freezing coke / ice cream at me?! This is not comfort, this is sending me to the grave so you can inherit my backlog! Shocking!`;
         feel = "🤬 Stomach Freezing";
       } else if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 16;
+        change = isTalkative ? 14 + dialogueBonus : 11;
         reply = isTalkative
           ? `(Tears streaming down) A heavy portion of hot food and a rescue power bank to solve my black-screen nightmare! You are my absolute savior! Stomach full, phone resurrected, concurrent bugs can go to hell! Especially your sharp comment on our painful corporate life: "${shopkeeperInput}", perfectly hit my vulnerable programmer nerve! I am deeply touched!`
           : `(Devouring hot bento while plugging in the power bank) This is the ultimate comfort carbohydrate that keeps a desperate overtime programmer alive! Returning to the hellish keyboard now. Too bad you are so quiet, without even a 'good job', like a cold corporate machine.`;
@@ -823,7 +823,7 @@ export function evaluateChatOffline(
     if (validatedGuestId === 0) { // Uncle Lin
       const hasCorrectDialogue = inputLower.includes("탐정") || inputLower.includes("단서") || inputLower.includes("증거") || inputLower.includes("진실") || inputLower.includes("사건") || inputLower.includes("도둑");
       if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 15;
+        change = isTalkative ? 14 + dialogueBonus : 10;
         reply = isTalkative
           ? `(소매 속으로 오뎅과 차가운 콜라를 능숙히 포장해 넣으며) 머리속의 긴장 안개가 한순간에 걷히는군! 이 완벽한 온냉의 조화는 사건 해결을 돕는 결정적인 수사 장비일세! 트레이의 두 상품 모두 회수하지. 더욱이 점장님의 이 정교한 분석인 “${shopkeeperInput}”는 명탐정의 수사 동반자다워! 오늘 밤 비밀 검거 작전은 대성공이네!`
           : `(오뎅과 아이스 콜라를 꿀꺽 삼키며) 자원은 다 확보되었구려... 점장, 사건 실마리 충전은 잘 되었네만, 물건을 건네며 말 한마디 없이 로봇처럼 고요히 있는 모습은 참으로 과묵하고 서늘하외다.`;
@@ -868,7 +868,7 @@ export function evaluateChatOffline(
           : `으아! 제가 춥다고 오들오들 떨고 있는데, 점장님은 아무 말도 없이 차가운 [달콤 밀크 아이스크림]만 슥 내미시다니요?! 혹은 이것이 소문으로만 듣던 시크한 무대포 처방전인가요? 뼈가 시려요!`;
         feel = "🥶 오들오들 소름";
       } else if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 16;
+        change = isTalkative ? 14 + dialogueBonus : 11;
         reply = isTalkative
           ? `와아! 배고픔과 핸드폰 방전이라는 이중 산악 조난 위기를 한 방에 완벽 해결해 주셨네요! 우주 최고의 점장님이세요! 게다가 걱정 어린 조언 “${shopkeeperInput}”까지... 온몸이 사르르 따뜻해지는 기분이에요! 감사해요!`
           : `어머나! 따뜻한 장백 오뎅이랑 급속 보조 전원이 한 손에 다 들어왔네요! 에너지가 번뜩번뜩 솟구쳐요! 하지만 건네주실 때 어쩜 그렇게 말씀 한 마디 없이 시크하게 슥 밀어주시는지, 마치 닌자 같으세요.`;
@@ -913,9 +913,9 @@ export function evaluateChatOffline(
           : `사장님! 방금 작열하는 태양 아래서 농구하다 탈진 서러움 직전인데 말 한마디 대꾸 없이 【뜨거운 물】을 내미시다니요?! 혹시 이것이 무언의 스파르타 한증막 특훈인가요? 살려주세요, 단 당분 콜라나 빙수를 원해요!`;
         feel = "🥵 극도의 더위 투쟁";
       } else if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 15;
+        change = isTalkative ? 14 + dialogueBonus : 10;
         reply = isTalkative
-          ? `폭풍 감격! 머리가 띵해질 차가운 버블티와 극강 소맥 수액 가스 콜라, 거기에 뚱뚱이 도시락이랑 파워 충전 모듈까지! 리스폰 완벽 지대 대안착입니다! 게다가 점장 형의 구수한 동네 대화인 “${shopkeeperInput}”를 듣고 나니 저 세상 기쁨입니다! 정말 감성 충만하네요!`
+          ? `폭풍 감격! 머리가 띵해질 차가운 버블티와 극강 소맥 수액 가스 콜라, 거기에 뚱뚱이 도시락이랑 파워 충전 모듈까지! ...`
           : `(아이스 마니아 음료를 단숨에 들이켜며) 대박 최고! 순식간에 게이지 완충 완료입니다. 점장 형님이 전직 무술 달인이라 그런지 말도 한마디도 없고 묵묵한 대리석 조각상처럼 고고한 포즈를 고수하네만, 이 완벽한 군것질 세트 덕에 리뷰 5개 날리겠습니다!`;
         feel = isTalkative ? "🥳 극강의 하이텐션 축제" : "🥳 행복 대포텐 단 고요한 점장";
       } else if (correctCount === 1 && wrongCount === 0) {
@@ -958,7 +958,7 @@ export function evaluateChatOffline(
           : `(극도로 일그러진 안색으로 위를 움켜쥐며) 점장, 3일 반 통장 영혼 다 털고 위장 관절이 꽁꽁 얼어붙어 식은땀을 흘리는데, 한 마디 기색도 없이 저승사자 같은 한랭 설빙 스위트 바와 콜라를 올려놓았군요. 이것은 오프라인 힐링이 아니라 가속도 유인 사망 원한 공격입니다! PM의 지령입니까?! 원망스럽네요.`;
         feel = "🤬 극렬한 궐기 저항";
       } else if (correctCount >= 2 && wrongCount === 0) {
-        change = isTalkative ? 22 + dialogueBonus : 16;
+        change = isTalkative ? 14 + dialogueBonus : 11;
         reply = isTalkative
           ? `(일순간 눈물이 안면을 강타하며 분출) 김이 모락모락 나는 초강수 탄수화물และ 배터리 심폐소생술 급행 전원 케어팩! 점장님은 필멸의 가혹한 지상 세계에서 만난 마법의 생명줄입니다! 특히 제 직장 아수라장 애환의 비참함을 정확히 조명해 준 한 마디 “${shopkeeperInput}”는 가슴 가장 그늘진 고통의 심장부를 다독여 주시네요. 대성통곡의 영광을 받칩니다!`
           : `(충전 보조 배터리를 기기에 밀어 넣고 고온의 도시락 육즙을 바삐 대량 흡입하며) 이것こそ 가혹한 현실 지옥의 야근 일개미가 연소할 최소한의 연명 에너지원! 신속히 모니터 지옥으로 회군하겠습니다. 아깝구려, 점장 주인이 대기업 관공서의 자금 집행 머신처럼 얼음처럼 냉혹하고 가해 노동적인 '수고했어' 한마디조차 아끼시니 실로 삭막하고 날카로운 공간입니다.`;
